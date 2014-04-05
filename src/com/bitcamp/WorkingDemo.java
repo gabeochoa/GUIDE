@@ -28,13 +28,14 @@ public class WorkingDemo
 		JTabbedPane codeTabs = initalizeCodeTabs(desktopPane);
 		desktopPane.add(createInternalFrame("Browser Two",
 				"http://www.cplusplus.com", 100));
-
+		DesktopScrollPane scrollPane = new DesktopScrollPane(desktopPane);
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		frame.add(desktopPane, BorderLayout.CENTER);
+		frame.add(scrollPane, BorderLayout.CENTER);
 		frame.setSize(1280, 720);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+		scrollPane.resizeDesktop();
 	}
 
 	private static JTabbedPane initalizeCodeTabs(JDesktopPane deskPa)
@@ -45,7 +46,7 @@ public class WorkingDemo
 		myTabs.add("New", deskPa);
 
 		myTabs.getInputMap().put(KeyStroke.getKeyStroke("F2"), "closeTab");
-		myTabs.getActionMap().put("clostTab", anAction);
+		//myTabs.getActionMap().put("clostTab", anAction);
 		return myTabs;
 	}
 
