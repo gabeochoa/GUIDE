@@ -40,9 +40,11 @@ import java.awt.*;
 public class Newdayclass extends JInternalFrame {
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     static String refObj = "";
-    int width = screenSize.width - 640;
-    int height = screenSize.height - 150;
-    int xOffset = screenSize.width - width, yOffset = 0;
+    int inset = 50;
+    
+    int width = screenSize.width / 2 - 125;
+    int height = screenSize.height - 175;
+    int xOffset = (screenSize.width / 2), yOffset = 0;
     
     public Newdayclass(String ref) {
         super("Reference Documentation " + ref, 
