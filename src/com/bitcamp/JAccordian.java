@@ -108,7 +108,7 @@ public class JAccordian extends JPanel implements ActionListener
 	 */
 	public void setVisibleBar( int visibleBar )
 	{
-		if( visibleBar > 0 &&
+		if( visibleBar >= 0 &&
 				visibleBar < this.bars.size() - 1 )
 		{
 			this.visibleBar = visibleBar;

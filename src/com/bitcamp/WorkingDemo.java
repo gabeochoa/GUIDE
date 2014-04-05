@@ -46,6 +46,7 @@ public static JAccordian jac = null;
 		jac.setVisibleBar(2);
 		jac.setVisible(true);
 		jac.setSize(100,100);
+		jac.setVisibleBar(0);
         
         JInternalFrame internalFrame = new JInternalFrame(title, true);
         internalFrame.setContentPane(jac);
