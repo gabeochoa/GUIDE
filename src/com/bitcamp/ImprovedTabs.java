@@ -49,12 +49,16 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.text.JTextComponent;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
  
 public class ImprovedTabs extends JPanel {
+	
+	RSyntaxTextArea textArea;
+	
     public ImprovedTabs() {
         super(new GridLayout(1, 1));
          
@@ -62,7 +66,7 @@ public class ImprovedTabs extends JPanel {
         ImageIcon icon = createImageIcon("images/middle.gif");
          
         
-        RSyntaxTextArea textArea = new RSyntaxTextArea(20, 60);
+        textArea = new RSyntaxTextArea(20, 60);
         textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
         textArea.setCodeFoldingEnabled(true);
         RTextScrollPane sp = new RTextScrollPane(textArea);
@@ -70,6 +74,7 @@ public class ImprovedTabs extends JPanel {
         JComponent panel1 = makeTextPanel("Panel #1");
         tabbedPane.addTab("CPP 1", icon, sp,
                 "Does nothing");
+        System.out.println(textArea.getText());
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
          
         JComponent panel2 = makeTextPanel("Panel #2");

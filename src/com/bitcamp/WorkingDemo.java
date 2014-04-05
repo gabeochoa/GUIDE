@@ -26,6 +26,7 @@ public class WorkingDemo
 {
 
 	public static JAccordian jac = null;
+	private static ImprovedTabs imp;
 
 	public static void main(String[] args)
 	{
@@ -42,12 +43,20 @@ public class WorkingDemo
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		scrollPane.resizeDesktop();
+		while(true)
+			update();
+	}
+
+	private static void update()
+	{
+		System.out.println(imp.textArea.getText());
 	}
 
 	private static JInternalFrame initalizeCodeTabs(JDesktopPane deskPa)
 	{
 		CodeViewComponent internalFrame = new CodeViewComponent();
-		internalFrame.setContentPane(new ImprovedTabs());
+		imp = new ImprovedTabs();
+		internalFrame.setContentPane(imp);
 		internalFrame.setLocation(0, 0);
 		internalFrame.setSize(640, 720);
 		internalFrame.setVisible(true);
