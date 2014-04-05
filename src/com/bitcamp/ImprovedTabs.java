@@ -75,7 +75,7 @@ public class ImprovedTabs extends JPanel{
         
 
         JButton mybutton = new JButton("Refresh");
-		tabbedPane.add(mybutton);
+		//tabbedPane.add(mybutton);
 		
        
         JComponent panel1 = makeTextPanel("Panel #1");

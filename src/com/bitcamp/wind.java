@@ -78,6 +78,7 @@ public class wind extends JFrame implements ActionListener
 		{ // new
 			try
 			{
+				WorkingDemo.getJacced().removeAll();
 				fetchUrl();
 			}
 			catch(IOException e1)
@@ -113,7 +114,7 @@ public class wind extends JFrame implements ActionListener
 		Browser brow = BrowserFactory.create();
 		brow.loadURL("http://www.cplusplus.com");
 
-		jac.addBar("Welcome", JAccordian.getDummyPanel("Welcome"));
+		//jac.addBar("Welcome", JAccordian.getDummyPanel("Welcome"));
 		jac.setVisibleBar(0);
 		jac.setVisible(true);
 		jac.setSize(100, 100);
@@ -154,10 +155,10 @@ public class wind extends JFrame implements ActionListener
 			Browser brow = BrowserFactory.create();
 			brow.loadURL(curImportMaps.get(curImport));
 
-			jac.addBar(curImport, JAccordian.getDummyPanel(curImport));
-			jac.setVisibleBar(0);
+			jac.addBar(curImport, brow.getView().getComponent());
 			jac.setVisible(true);
 			jac.setSize(100, 100);
+			jac.setVisibleBar(0);
 		}
 	}
 }

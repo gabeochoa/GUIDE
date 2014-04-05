@@ -77,20 +77,18 @@ public class WorkingDemo
 		browser.loadURL(url);
 
 		jac = new JAccordian();
-
-		jac.addBar("One", browser.getView().getComponent());
+		/*jac.addBar("One", browser.getView().getComponent());
 		jac.addBar("Two", JAccordian.getDummyPanel("Two"));
 		jac.addBar("Three", JAccordian.getDummyPanel("Three"));
 		jac.addBar("Four", JAccordian.getDummyPanel("Four"));
-		jac.addBar("Five", JAccordian.getDummyPanel("Five"));
-		jac.setVisibleBar(2);
+		jac.addBar("Five", JAccordian.getDummyPanel("Five"));*/
 		jac.setVisible(true);
 		jac.setSize(100, 100);
 		jac.setVisibleBar(0);
 
 		JInternalFrame internalFrame = new JInternalFrame(title, true);
 		internalFrame.setContentPane(jac);
-		// internalFrame.setContentPane(browser.getView().getComponent());
+		//internalFrame.setContentPane(browser.getView().getComponent());
 		internalFrame.setLocation(640, 0);
 		internalFrame.setSize(640, 720);
 		internalFrame.setVisible(true);
