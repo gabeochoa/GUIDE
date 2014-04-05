@@ -10,6 +10,8 @@ import java.awt.BorderLayout;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JTabbedPane;
+import javax.swing.KeyStroke;
 import javax.swing.WindowConstants;
 
 import com.teamdev.jxbrowser.chromium.Browser;
@@ -23,8 +25,7 @@ public class WorkingDemo
 	public static void main(String[] args)
 	{
 		JDesktopPane desktopPane = new JDesktopPane();
-		desktopPane.add(createCodeFrame("Browser One",
-				"http://www.teamdev.com", 0));
+		JTabbedPane codeTabs = initalizeCodeTabs(desktopPane);
 		desktopPane.add(createInternalFrame("Browser Two",
 				"http://www.cplusplus.com", 100));
 
@@ -34,6 +35,18 @@ public class WorkingDemo
 		frame.setSize(1280, 720);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+	}
+
+	private static JTabbedPane initalizeCodeTabs(JDesktopPane deskPa)
+	{
+		// TODO Auto-generated method stub
+		JTabbedPane myTabs = new JTabbedPane();
+		deskPa.add(createCodeFrame());
+		myTabs.add("New", deskPa);
+
+		myTabs.getInputMap().put(KeyStroke.getKeyStroke("F2"), "closeTab");
+		myTabs.getActionMap().put("clostTab", anAction);
+		return myTabs;
 	}
 
 	private static JInternalFrame createInternalFrame(String title, String url,
@@ -63,8 +76,7 @@ public class WorkingDemo
 		return internalFrame;
 	}
 
-	private static JInternalFrame createCodeFrame(String title, String url,
-			int offset)
+	private static JInternalFrame createCodeFrame()
 	{
 		CodeViewComponent internalFrame = new CodeViewComponent();
 		internalFrame.setLocation(0, 0);
