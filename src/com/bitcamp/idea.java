@@ -1,22 +1,23 @@
 package com.bitcamp;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
-public class idea extends JFrame implements Runnable
+public class idea extends JFrame implements Runnable, ActionListener
 {
 	private static final long serialVersionUID = -2673914251390653455L;
 
@@ -35,29 +36,95 @@ public class idea extends JFrame implements Runnable
 
 	JDesktopPane desktop;
 
-	public idea()
+	public idea() throws IOException
 	{
 		size = new Dimension(WIDTH, HEIGHT);
 		setSize(size);
-		setPreferredSize(size);
-		setMinimumSize(size);
-		setMaximumSize(size);
-
+//		setPreferredSize(size);
+//		setMinimumSize(size);
+//		setMaximumSize(size);
+//
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("guIDE");
 
+		int inset = 50;
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds(inset, inset,
+                  screenSize.width  - inset*2,
+                  screenSize.height - inset*2);
+		
 		// CREATING THE IMAGE AND BUFFER TO DRAW ON
-		buffer = createImage(size.width, size.height);
-		gr = buffer.getGraphics();
+		//buffer = createImage(size.width, size.height);
+		//gr = buffer.getGraphics();
 
 		desktop = new JDesktopPane();
-		JFrame in = createFrame(this);
-		// setContentPane(desktop);
-		setContentPane(in.getContentPane());
+		createFrame();
+		setContentPane(desktop);
 		setJMenuBar(createMenuBar());
-
+		desktop.setDragMode(JDesktopPane.OUTLINE_DRAG_MODE);
 	}
+	
+
+    protected JMenuBar createMenuBar() {
+        JMenuBar menuBar = new JMenuBar();
+
+        //Set up the lone menu.
+        JMenu menu = new JMenu("Document");
+        menu.setMnemonic(KeyEvent.VK_D);
+        menuBar.add(menu);
+
+        //Set up the first menu item.
+        JMenuItem menuItem = new JMenuItem("New");
+        menuItem.setMnemonic(KeyEvent.VK_N);
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(
+                KeyEvent.VK_N, ActionEvent.ALT_MASK));
+        menuItem.setActionCommand("new");
+        menuItem.addActionListener(this);
+        menu.add(menuItem);
+
+        //Set up the second menu item.
+        menuItem = new JMenuItem("Quit");
+        menuItem.setMnemonic(KeyEvent.VK_Q);
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(
+                KeyEvent.VK_Q, ActionEvent.ALT_MASK));
+        menuItem.setActionCommand("quit");
+        menuItem.addActionListener(this);
+        menu.add(menuItem);
+
+        return menuBar;
+    }
+	
+
+    //React to menu selections.
+    public void actionPerformed(ActionEvent e) {
+        if ("new".equals(e.getActionCommand())) { //new
+            createFrame();
+        } else { //quit
+            quit();
+        }
+    }
+
+    //Create a new internal frame.
+    protected void createFrame() {
+    	try{
+        BadBrowser frame = new BadBrowser();
+        frame.setVisible(true); //necessary as of 1.3
+        desktop.add(frame);
+        try {
+            frame.setSelected(true);
+        } catch (java.beans.PropertyVetoException e) {}
+    	}catch(Exception e)
+    	{
+    		e.printStackTrace();
+    	}
+    }
+
+    //Quit the application.
+    protected void quit() {
+        System.exit(0);
+    }
+
 
 	private void tick()
 	{
@@ -65,13 +132,41 @@ public class idea extends JFrame implements Runnable
 
 	}
 
-	public static void main(String[] args)
-	{
-		idea i = new idea();
 
-		while(true)
-			i.run();
-	}
+    /**
+     * Create the GUI and show it.  For thread safety,
+     * this method should be invoked from the
+     * event-dispatching thread.
+     * @throws IOException 
+     */
+    private static void createAndShowGUI() throws IOException {
+        //Make sure we have nice window decorations.
+        JFrame.setDefaultLookAndFeelDecorated(true);
+
+        //Create and set up the window.
+        idea frame = new idea();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //Display the window.
+        frame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        //Schedule a job for the event-dispatching thread:
+        //creating and showing this application's GUI.
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                try
+				{
+					createAndShowGUI();
+				} catch (IOException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+        });
+    }
 
 	public void run()
 	{
@@ -138,74 +233,6 @@ public class idea extends JFrame implements Runnable
 			}
 
 		}
-	}
-
-	protected JMenuBar createMenuBar()
-	{
-		JMenuBar menuBar = new JMenuBar();
-
-		// Set up the lone menu.
-		JMenu menu = new JMenu("Document");
-		menu.setMnemonic(KeyEvent.VK_D);
-		menuBar.add(menu);
-
-		// Set up the first menu item.
-		JMenuItem menuItem = new JMenuItem("New");
-		menuItem.setMnemonic(KeyEvent.VK_N);
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
-				ActionEvent.ALT_MASK));
-		menuItem.setActionCommand("new");
-		menuItem.addActionListener(null);
-		menu.add(menuItem);
-
-		// Set up the second menu item.
-		menuItem = new JMenuItem("Quit");
-		menuItem.setMnemonic(KeyEvent.VK_Q);
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
-				ActionEvent.ALT_MASK));
-		menuItem.setActionCommand("quit");
-		menuItem.addActionListener(null);
-		menu.add(menuItem);
-
-		return menuBar;
-	}
-
-	// React to menu selections.
-	public void actionPerformed(ActionEvent e)
-	{
-		if("new".equals(e.getActionCommand()))
-		{ // new
-			createFrame(this);
-		}
-		else
-		{ // quit
-			quit();
-		}
-	}
-
-	// Create a new internal aframe.
-	protected JFrame createFrame(idea i)
-	{
-		WebPanel browser = new WebPanel("How do I even?");
-		JFrame lol = new JFrame();
-		lol.setVisible(true);
-		// browser.setVisible(true);
-
-		JPanel jp = new JPanel(new BorderLayout());
-		JMenuBar inside = lol.getJMenuBar();
-		Container jcp = lol.getContentPane();
-		if(inside != null)
-			jp.add(inside, BorderLayout.NORTH);
-		jp.add(jcp, BorderLayout.CENTER);
-
-		i.add(jp);
-		return lol;
-	}
-
-	// Quit the application.
-	protected void quit()
-	{
-		System.exit(0);
 	}
 
 	public void paint(Graphics g)

@@ -9,14 +9,14 @@ import java.net.MalformedURLException;
 
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.JInternalFrame;
 
-public class BadBrowser extends JFrame
+public class BadBrowser extends JInternalFrame
 {
 
 	public JPanel address_panel, window_panel;
@@ -35,6 +35,7 @@ public class BadBrowser extends JFrame
 
 	public BadBrowser() throws IOException
 	{
+		super();//"WEB VIEW BAD BROWSER",true,true,true,true);
 
 		// Define address bar
 		address_label = new JLabel(" address: ", SwingConstants.CENTER);
@@ -57,19 +58,18 @@ public class BadBrowser extends JFrame
 		window_scroll = new JScrollPane(window_pane);
 		window_panel.add(window_scroll);
 
-		Container pane = getContentPane();
+		Container pane = this.getContentPane();
 		pane.setLayout(new BorderLayout());
 
 		pane.add(address_panel, BorderLayout.NORTH);
 		pane.add(window_panel, BorderLayout.CENTER);
-
-		setTitle("web browser");
-		setSize(800, 600);
-		setVisible(true);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+		setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
 	}
 
+	static int openFrameCount = 0;
+	static final int xOffset = 30, yOffset = 30;
+		
+	
 	public class Go implements ActionListener
 	{
 
@@ -78,7 +78,6 @@ public class BadBrowser extends JFrame
 
 			try
 			{
-
 				window_pane.setPage(address_tf.getText());
 
 			}
