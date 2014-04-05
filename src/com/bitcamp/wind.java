@@ -206,14 +206,14 @@ public class wind extends JFrame implements ActionListener
 		 * The text the user entered into the CodeViewComponent (left side of
 		 * program).
 		 */
-		String rawText = WorkingDemo.updateS();
-		System.out.println(rawText);
-		String stringComponents[] = rawText.split("\\s+");
+		String selectedText = WorkingDemo.updateS();
+		System.out.println(selectedText);
+		// String stringComponents[] = rawText.split("\\s+");
 		/*
 		 * [0] is the #include part, useless [1] is "<blah>" = key
 		 */
-		String importKey = stringComponents[1];
-		String url = WorkingDemo.keywordToUrl.get(importKey);
+		// String importKey = stringComponents[1];
+		String url = WorkingDemo.keywordToUrl.get(selectedText);
 		/*
 		 * Our accordian panel for the bars that hold a browser
 		 */
@@ -221,7 +221,7 @@ public class wind extends JFrame implements ActionListener
 		WorkingDemo.getJacced().removeAll();
 		Browser brow = BrowserFactory.create();
 		brow.loadURL(url);
-		jac.addBar(importKey, brow.getView().getComponent());
+		jac.addBar(selectedText, brow.getView().getComponent());
 		jac.setLocation(0, 0);
 		jac.setSize(640, 720);
 		jac.setVisible(true);

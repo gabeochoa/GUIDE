@@ -53,12 +53,12 @@ public class WorkingDemo
 		/*
 		 * For bars processing
 		 */
-		return imp.textArea.getText();
+		// return imp.textArea.getText();
 
 		/*
 		 * Gets the text that the user has selected.
 		 */
-		// return imp.textArea.getSelectedOccurrenceText();
+		return imp.textArea.getSelectedText();
 	}
 
 	public static JAccordian getJacced()
