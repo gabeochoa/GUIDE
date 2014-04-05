@@ -16,10 +16,10 @@ import javax.swing.WindowConstants;
 import com.teamdev.jxbrowser.chromium.Browser;
 import com.teamdev.jxbrowser.chromium.BrowserFactory;
 
-/**
- * The sample demonstrates how to use Browser in JInternalFrame components.
- */
 public class WorkingDemo {
+
+public static JAccordian jac = null;
+
     public static void main(String[] args) {
         JDesktopPane desktopPane = new JDesktopPane();
         desktopPane.add(createCodeFrame("Browser One", "http://www.teamdev.com", 0));
@@ -28,7 +28,7 @@ public class WorkingDemo {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.add(desktopPane, BorderLayout.CENTER);
-        frame.setSize(800, 800);
+        frame.setSize(1280, 720);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
@@ -37,17 +37,8 @@ public class WorkingDemo {
         Browser browser = BrowserFactory.create();
         browser.loadURL(url);
 
-        JInternalFrame internalFrame = new JInternalFrame(title, true);
-        internalFrame.setContentPane(browser.getView().getComponent());
-        internalFrame.setLocation(100 + offset, 100 + offset);
-        internalFrame.setSize(400, 800);
-        internalFrame.setVisible(true);
-        return internalFrame;
-    }
-
-    private static JInternalFrame createCodeFrame(String title, String url, int offset) {
-        JAccordian jac = new JAccordian();
-        jac.addBar( "One", JAccordian.getDummyPanel( "One" ) );
+        jac = new JAccordian();
+        jac.addBar( "One", browser.getView().getComponent());
 		jac.addBar( "Two", JAccordian.getDummyPanel( "Two" ) );
 		jac.addBar( "Three", JAccordian.getDummyPanel( "Three" ) );
 		jac.addBar( "Four", JAccordian.getDummyPanel( "Four" ) );
@@ -55,12 +46,20 @@ public class WorkingDemo {
 		jac.setVisibleBar(2);
 		jac.setVisible(true);
 		jac.setSize(100,100);
-
-    	
-        CodeInternalFrame internalFrame = new CodeInternalFrame();
+        
+        JInternalFrame internalFrame = new JInternalFrame(title, true);
         internalFrame.setContentPane(jac);
-        internalFrame.setLocation(100 + offset, 100 + offset);
-        internalFrame.setSize(400, 400);
+        //internalFrame.setContentPane(browser.getView().getComponent());
+        internalFrame.setLocation(640, 0);
+        internalFrame.setSize(640, 720);
+        internalFrame.setVisible(true);
+        return internalFrame;
+    }
+
+    private static JInternalFrame createCodeFrame(String title, String url, int offset) {
+    	CodeInternalFrame internalFrame = new CodeInternalFrame();
+        internalFrame.setLocation(0,0);
+        internalFrame.setSize(640, 720);
         internalFrame.setVisible(true);
         return internalFrame;
     }
