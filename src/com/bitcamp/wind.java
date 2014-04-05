@@ -206,20 +206,26 @@ public class wind extends JFrame implements ActionListener
 		 * The text the user entered into the CodeViewComponent (left side of
 		 * program).
 		 */
+		Browser brow = BrowserFactory.create();
+		JAccordian jac = WorkingDemo.getJacced();
+		WorkingDemo.getJacced().removeAll();
 		String selectedText = WorkingDemo.updateS();
-		System.out.println(selectedText);
+		String url = "http://www.cplusplus.com";
+		if(WorkingDemo.keywordToUrl.containsKey(selectedText))
+		{
+			url = WorkingDemo.keywordToUrl.get(selectedText);
+		}
+
 		// String stringComponents[] = rawText.split("\\s+");
 		/*
 		 * [0] is the #include part, useless [1] is "<blah>" = key
 		 */
 		// String importKey = stringComponents[1];
-		String url = WorkingDemo.keywordToUrl.get(selectedText);
+		// String url = WorkingDemo.keywordToUrl.get(selectedText);
 		/*
 		 * Our accordian panel for the bars that hold a browser
 		 */
-		JAccordian jac = WorkingDemo.getJacced();
-		WorkingDemo.getJacced().removeAll();
-		Browser brow = BrowserFactory.create();
+
 		brow.loadURL(url);
 		jac.addBar(selectedText, brow.getView().getComponent());
 		jac.setLocation(0, 0);
