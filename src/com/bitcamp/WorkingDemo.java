@@ -32,6 +32,7 @@ public class WorkingDemo
 	{
 		JDesktopPane desktopPane = new JDesktopPane();
 		JInternalFrame codeTabs = initalizeCodeTabs(desktopPane);
+		codeTabs.setSize(640,720);
 		desktopPane.add(codeTabs);
 		desktopPane.add(createInternalFrame("Browser Two",
 				"http://www.cplusplus.com", 100));
