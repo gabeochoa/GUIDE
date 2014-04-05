@@ -38,6 +38,7 @@ public static JAccordian jac = null;
         browser.loadURL(url);
 
         jac = new JAccordian();
+        
         jac.addBar( "One", browser.getView().getComponent());
 		jac.addBar( "Two", JAccordian.getDummyPanel( "Two" ) );
 		jac.addBar( "Three", JAccordian.getDummyPanel( "Three" ) );
