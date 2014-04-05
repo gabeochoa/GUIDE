@@ -67,12 +67,15 @@ public class NEwday extends JFrame
         desktop = new JDesktopPane(); //a specialized layered pane
         try
 		{
-			createFrame();
+			createCodeFrame();
+			createRefFrame();
 		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} //create first "window"
+		}
+        
+        //create first "window"
         setContentPane(desktop);
         setJMenuBar(createMenuBar());
 
@@ -114,7 +117,7 @@ public class NEwday extends JFrame
         if ("new".equals(e.getActionCommand())) { //new
             try
 			{
-				createFrame();
+				createCodeFrame();
 			} catch (IOException e1)
 			{
 				// TODO Auto-generated catch block
@@ -126,7 +129,16 @@ public class NEwday extends JFrame
     }
 
     //Create a new internal frame.
-    protected void createFrame() throws IOException {
+    protected void createCodeFrame() throws IOException {
+    	//MyInternalFrame frame = new MyInternalFrame();
+    	CodeInternalFrame frame = new CodeInternalFrame();
+        frame.setVisible(true); //necessary as of 1.3
+        desktop.add(frame);
+        try {
+            frame.setSelected(true);
+        } catch (java.beans.PropertyVetoException e) {}
+    }
+    protected void createRefFrame() throws IOException {
     	//MyInternalFrame frame = new MyInternalFrame();
     	Newdayclass frame = new Newdayclass();
         frame.setVisible(true); //necessary as of 1.3

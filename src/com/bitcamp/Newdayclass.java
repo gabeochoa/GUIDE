@@ -31,10 +31,11 @@ package com.bitcamp;
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */ 
 
-import javax.swing.JInternalFrame;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
-import java.awt.event.*;
-import java.awt.*;
+import javax.swing.JInternalFrame;
 
 /* Used by InternalFrameDemo.java. */
 public class Newdayclass extends JInternalFrame {
@@ -60,6 +61,27 @@ public class Newdayclass extends JInternalFrame {
 
         //Set the window's location.
         setLocation(xOffset, yOffset);
+       
+        p();
+        setVisible(true);
+    }
+    
+    public void p()
+    {
+        JAccordian jac = new JAccordian();
+        jac.addBar( "One", JAccordian.getDummyPanel( "One" ) );
+        jac.addBar( "Two", JAccordian.getDummyPanel( "Two" ) );
+        jac.addBar( "Three", JAccordian.getDummyPanel( "Three" ) );
+        jac.addBar( "Four", JAccordian.getDummyPanel( "Four" ) );
+        jac.addBar( "Five", JAccordian.getDummyPanel( "Five" ) );
+        jac.setVisibleBar(2);
+        jac.setVisible(true);
+        jac.setSize(100,100);
+        
+        getContentPane().setLayout(new BorderLayout());
+        getContentPane().add(jac, BorderLayout.CENTER);
+        pack();
+        
     }
 
     public Newdayclass() {
