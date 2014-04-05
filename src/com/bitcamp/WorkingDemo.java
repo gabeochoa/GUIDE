@@ -5,6 +5,14 @@ package com.bitcamp;
  * and CONFIDENTIAL. Use is subject to license terms.
  */
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.util.HashMap;
+
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 
@@ -16,28 +24,38 @@ public class WorkingDemo
 
 	public static JAccordian jac = null;
 	private static ImprovedTabs imp;
+	public static HashMap<String, String> keywordToUrl = new HashMap<String, String>();
 
-	public static void main(String[] args)
+	public static void main(String[] args) throws IOException
 	{
+		initializeURL_Map();
 		JDesktopPane desktopPane = new JDesktopPane();
 		JInternalFrame codeTabs = initalizeCodeTabs(desktopPane);
-		codeTabs.setSize(640,720);
+		codeTabs.setSize(640, 720);
 		desktopPane.add(codeTabs);
 		desktopPane.add(createInternalFrame("Browser Two",
 				"http://www.cplusplus.com", 100));
 		DesktopScrollPane scrollPane = new DesktopScrollPane(desktopPane);
-		wind frame = new wind(scrollPane);
+		wind frame = new wind(desktopPane);
 		desktopPane.add(frame);
 		scrollPane.resizeDesktop();
-		while(true)
-			update();
+		// while(true)
+		// update();
 	}
 
-	 
-			
-	private static void update()
+	// private static void update()
+	// {
+	// System.out.println(imp.textArea.getText());
+	// }
+
+	public static String updateS()
 	{
-		System.out.println(imp.textArea.getText());
+		return imp.textArea.getText();
+	}
+
+	public static JAccordian getJacced()
+	{
+		return jac;
 	}
 
 	private static JInternalFrame initalizeCodeTabs(JDesktopPane deskPa)
@@ -86,5 +104,29 @@ public class WorkingDemo
 		internalFrame.setSize(640, 720);
 		internalFrame.setVisible(true);
 		return internalFrame;
+	}
+
+	public static void initializeURL_Map() throws IOException
+	{
+
+		InputStream fis;
+		BufferedReader br;
+		String line;
+
+		fis = new FileInputStream("referencePages.txt");
+		br = new BufferedReader(new InputStreamReader(fis,
+				Charset.forName("UTF-8")));
+		while((line = br.readLine()) != null)
+		{
+			String stringComponents[] = line.split("\\s+");
+			String importKey = stringComponents[0];
+			String correspondUrl = stringComponents[1];
+			keywordToUrl.put(importKey, correspondUrl);
+		}
+
+		// Done with the file
+		br.close();
+		br = null;
+		fis = null;
 	}
 }

@@ -15,16 +15,18 @@ import org.fife.ui.rtextarea.RTextScrollPane;
  */
 public class CodeViewComponent extends JInternalFrame
 {
+	private RSyntaxTextArea currentTextBlock;
 
 	public CodeViewComponent()
 	{
 
 		JPanel cp = new JPanel(new BorderLayout());
 
-		RSyntaxTextArea textArea = new RSyntaxTextArea(20, 60);
-		textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
-		textArea.setCodeFoldingEnabled(true);
-		RTextScrollPane sp = new RTextScrollPane(textArea);
+		currentTextBlock = new RSyntaxTextArea(20, 60);
+		currentTextBlock
+				.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
+		currentTextBlock.setCodeFoldingEnabled(true);
+		RTextScrollPane sp = new RTextScrollPane(currentTextBlock);
 		cp.add(sp);
 
 		setContentPane(cp);
