@@ -11,6 +11,7 @@ import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -57,6 +58,8 @@ public class WorkingDemo
 	{
 		CodeViewComponent internalFrame = new CodeViewComponent();
 		imp = new ImprovedTabs();
+        JButton mybutton = new JButton("Refresh");
+        internalFrame.add(mybutton);
 		internalFrame.setContentPane(imp);
 		internalFrame.setLocation(0, 0);
 		internalFrame.setSize(640, 720);
