@@ -46,12 +46,6 @@ public class WorkingDemo
 
 	private static JInternalFrame initalizeCodeTabs(JDesktopPane deskPa)
 	{
-		
-		
-		
-		
-		
-		
 		CodeViewComponent internalFrame = new CodeViewComponent();
 		internalFrame.setContentPane(new ImprovedTabs());
 		internalFrame.setLocation(0, 0);
