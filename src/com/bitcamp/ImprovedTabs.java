@@ -46,19 +46,20 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.text.JTextComponent;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
  
-public class ImprovedTabs extends JPanel {
+public class ImprovedTabs extends JPanel{
 	
 	RSyntaxTextArea textArea;
+	JMenuBar menu;
 	
     public ImprovedTabs() {
         super(new GridLayout(1, 1));
@@ -71,6 +72,11 @@ public class ImprovedTabs extends JPanel {
         textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
         textArea.setCodeFoldingEnabled(true);
         RTextScrollPane sp = new RTextScrollPane(textArea);
+        
+
+        JButton mybutton = new JButton("Refresh");
+		tabbedPane.add(mybutton);
+		
        
         JComponent panel1 = makeTextPanel("Panel #1");
         tabbedPane.addTab("CPP 1", icon, sp,
@@ -100,8 +106,9 @@ public class ImprovedTabs extends JPanel {
          
         //The following line enables to use scrolling tabs.
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-    }
-     
+
+            }
+    
     protected JComponent makeTextPanel(String text) {
         JPanel panel = new JPanel(false);
         JLabel filler = new JLabel(text);
