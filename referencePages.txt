@@ -12,7 +12,7 @@
 <fstream> http://www.cplusplus.com/reference/fstream/
 <iomanip> http://www.cplusplus.com/reference/iomanip/
 <ios> http://www.cplusplus.com/reference/ios/
-<iosfwd> http://www.cplusplus.com/reference/ios/
+<iosfwd> http://www.cplusplus.com/reference/iosfwd/
 <iostream> http://www.cplusplus.com/reference/iostream/
 <istream> http://www.cplusplus.com/reference/istream/
 <ostream> http://www.cplusplus.com/reference/ostream/
@@ -26,7 +26,7 @@
 <algorithm> http://www.cplusplus.com/reference/algorithm/
 <bitset> http://www.cplusplus.com/reference/bitset/
 <chrono> http://www.cplusplus.com/reference/chrono/
-<codecvt> http://www.cplusplus.com/reference/bitset/
+<codecvt> http://www.cplusplus.com/reference/codecvt/
 <complex> http://www.cplusplus.com/reference/complex/
 <exception> http://www.cplusplus.com/reference/exception/
 <functional> http://www.cplusplus.com/reference/functional/
@@ -39,10 +39,10 @@
 <numeric> http://www.cplusplus.com/reference/numeric/
 <random> http://www.cplusplus.com/reference/random/
 <ratio> http://www.cplusplus.com/reference/ratio/
-<regex> http://www.cplusplus.com/reference/
+<regex> http://www.cplusplus.com/reference/regex/
 <stdexcept> http://www.cplusplus.com/reference/stdexcept/
-<string> http://www.cplusplus.com/reference/string
-<system_error> http://www.cplusplus.com/reference/system_error
+<string> http://www.cplusplus.com/reference/string/
+<system_error> http://www.cplusplus.com/reference/system_error/
 <tuple> http://www.cplusplus.com/reference/tuple/
 <typeindex> http://www.cplusplus.com/reference/typeindex/
 <typeinfo> http://www.cplusplus.com/reference/typeinfo/
