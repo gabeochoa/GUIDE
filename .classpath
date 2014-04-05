@@ -12,5 +12,11 @@
 	<classpathentry kind="lib" path="org.json-chargebee-1.0-javadoc.jar"/>
 	<classpathentry kind="lib" path="sendgrid-0.2.0-jar.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="jxweb/jxbrowser-4.3.jar"/>
+	<classpathentry kind="lib" path="jxweb/jxbrowser-linux32-4.3.jar"/>
+	<classpathentry kind="lib" path="jxweb/jxbrowser-linux64-4.3.jar"/>
+	<classpathentry kind="lib" path="jxweb/jxbrowser-mac-4.3.jar"/>
+	<classpathentry kind="lib" path="jxweb/jxbrowser-win-4.3.jar"/>
+	<classpathentry kind="lib" path="jxweb/license.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

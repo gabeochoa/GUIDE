@@ -32,7 +32,10 @@ package com.bitcamp;
  */ 
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Toolkit;
 
 import javax.swing.JInternalFrame;
@@ -40,63 +43,74 @@ import javax.swing.JInternalFrame;
 /* Used by InternalFrameDemo.java. */
 public class Newdayclass extends JInternalFrame {
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    static String refObj = "";
-    int inset = 50;
-    
-    int width = screenSize.width / 2 - 125;
-    int height = screenSize.height - 175;
-    int xOffset = (screenSize.width / 2), yOffset = 0;
-    
-    public Newdayclass(String ref) {
-        super("Reference Documentation " + ref, 
-              true, //resizable
-              true, //closable
-              true, //maximizable
-              true);//iconifiable
+	static String refObj = "";
+	int inset = 50;
 
-        //...Create the GUI and put it in the window...
+	int width = screenSize.width / 2 - 125;
+	int height = screenSize.height - 175;
+	int xOffset = (screenSize.width / 2), yOffset = 0;
 
-        //...Then set the window size or call pack...
-        setSize(width,height);
+	public Newdayclass(String ref) {
+		super("Reference Documentation " + ref, 
+				true, //resizable
+				true, //closable
+				true, //maximizable
+				true);//iconifiable
 
-        //Set the window's location.
-        setLocation(xOffset, yOffset);
-       
-        p();
-        setVisible(true);
-    }
-    
-    public void p()
-    {
-        JAccordian jac = new JAccordian();
-        jac.addBar( "One", JAccordian.getDummyPanel( "One" ) );
-        jac.addBar( "Two", JAccordian.getDummyPanel( "Two" ) );
-        jac.addBar( "Three", JAccordian.getDummyPanel( "Three" ) );
-        jac.addBar( "Four", JAccordian.getDummyPanel( "Four" ) );
-        jac.addBar( "Five", JAccordian.getDummyPanel( "Five" ) );
-        jac.setVisibleBar(2);
-        jac.setVisible(true);
-        jac.setSize(100,100);
-        
-        getContentPane().setLayout(new BorderLayout());
-        getContentPane().add(jac, BorderLayout.CENTER);
-        pack();
-        
-    }
+		//...Create the GUI and put it in the window...
 
-    public Newdayclass() {
-        super("Reference Documentation ", 
-              true, //resizable
-              true, //closable
-              true, //maximizable
-              true);//iconifiable
+		//...Then set the window size or call pack...
+		setSize(width,height);
 
-        //...Create the GUI and put it in the window...
+		//Set the window's location.
+		setLocation(xOffset, yOffset);
 
-        //...Then set the window size or call pack...
-        setSize(width,height);
+		p();
+		pack();
+		setVisible(true);
+		revalidate();
+	}
 
-        //Set the window's location.
-        setLocation(xOffset, yOffset);
-    }
+	public void p()
+	{
+		JAccordian jac = new JAccordian();
+		jac.addBar( "One", JAccordian.getDummyPanel( "One" ) );
+		jac.addBar( "Two", JAccordian.getDummyPanel( "Two" ) );
+		jac.addBar( "Three", JAccordian.getDummyPanel( "Three" ) );
+		jac.addBar( "Four", JAccordian.getDummyPanel( "Four" ) );
+		jac.addBar( "Five", JAccordian.getDummyPanel( "Five" ) );
+		jac.setVisibleBar(2);
+		jac.setVisible(true);
+		jac.setSize(100,100);
+
+		getContentPane().setLayout(new BorderLayout());
+		getContentPane().add(jac, BorderLayout.CENTER);
+		pack();
+	}
+
+	public Newdayclass() {
+		super("Reference Documentation ", 
+				true, //resizable
+				true, //closable
+				true, //maximizable
+				true);//iconifiable
+
+		//...Create the GUI and put it in the window...
+
+		//...Then set the window size or call pack...
+		setSize(width,height);
+
+		//Set the window's location.
+		setLocation(xOffset, yOffset);
+	}
+
+	public void paintComponent(Graphics g)
+	{
+		g.fillOval(0,0,221,220);
+		repaint();
+	}
+	@Override
+	public void paint(Graphics g) {
+	    super.paint(g);  
+	}
 }

@@ -81,6 +81,8 @@ public class NEwday extends JFrame
 
         //Make dragging a little faster but perhaps uglier.
         desktop.setDragMode(JDesktopPane.OUTLINE_DRAG_MODE);
+        setLocationRelativeTo(null);
+        repaint();
     }
 
     protected JMenuBar createMenuBar() {
