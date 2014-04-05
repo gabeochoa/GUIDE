@@ -72,30 +72,29 @@ public class wind extends JFrame implements ActionListener
 
 	public void actionPerformed(ActionEvent e)
 	{
-
-		System.out.println(e.getActionCommand());
 		/*
 		 * User wants a refreash
 		 */
 		if("refresh".equals(e.getActionCommand()))
 		{ // new
-			try
-			{
-				/*
-				 * Clear existing bars
-				 */
-				WorkingDemo.getJacced().removeAll();
-				/*
-				 * Put the urls into the respective browser bars.
-				 */
-				fetchUrl();
-			}
-			catch(IOException e1)
-			{
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			System.out.println("R");
+			pushUrlToBrowser();
+			// try
+			// {
+			// /*
+			// * Clear existing bars
+			// */
+			// WorkingDemo.getJacced().removeAll();
+			// /*
+			// * Put the urls into the respective browser bars.
+			// */
+			// fetchUrl();
+			// }
+			// catch(IOException e1)
+			// {
+			// // TODO Auto-generated catch block
+			// e1.printStackTrace();
+			// }
+			// System.out.println("R");
 		}
 		else
 		{ // quit
@@ -199,5 +198,32 @@ public class wind extends JFrame implements ActionListener
 			jac.setSize(100, 100);
 			jac.setVisibleBar(0);
 		}
+	}
+
+	public void pushUrlToBrowser()
+	{
+		/*
+		 * The text the user entered into the CodeViewComponent (left side of
+		 * program).
+		 */
+		String rawText = WorkingDemo.updateS();
+		System.out.println(rawText);
+		String stringComponents[] = rawText.split("\\s+");
+		/*
+		 * [0] is the #include part, useless [1] is "<blah>" = key
+		 */
+		String importKey = stringComponents[1];
+		String url = WorkingDemo.keywordToUrl.get(importKey);
+		/*
+		 * Our accordian panel for the bars that hold a browser
+		 */
+		JAccordian jac = WorkingDemo.getJacced();
+		WorkingDemo.getJacced().removeAll();
+		Browser brow = BrowserFactory.create();
+		brow.loadURL(url);
+		jac.addBar(importKey, brow.getView().getComponent());
+		jac.setLocation(0, 0);
+		jac.setSize(640, 720);
+		jac.setVisible(true);
 	}
 }

@@ -50,7 +50,15 @@ public class WorkingDemo
 
 	public static String updateS()
 	{
+		/*
+		 * For bars processing
+		 */
 		return imp.textArea.getText();
+
+		/*
+		 * Gets the text that the user has selected.
+		 */
+		// return imp.textArea.getSelectedOccurrenceText();
 	}
 
 	public static JAccordian getJacced()
@@ -75,21 +83,22 @@ public class WorkingDemo
 	{
 		Browser browser = BrowserFactory.create();
 		browser.loadURL(url);
-
 		jac = new JAccordian();
-		/*jac.addBar("One", browser.getView().getComponent());
-		jac.addBar("Two", JAccordian.getDummyPanel("Two"));
-		jac.addBar("Three", JAccordian.getDummyPanel("Three"));
-		jac.addBar("Four", JAccordian.getDummyPanel("Four"));
-		jac.addBar("Five", JAccordian.getDummyPanel("Five"));*/
+		/*
+		 * jac.addBar("One", browser.getView().getComponent());
+		 * jac.addBar("Two", JAccordian.getDummyPanel("Two"));
+		 * jac.addBar("Three", JAccordian.getDummyPanel("Three"));
+		 * jac.addBar("Four", JAccordian.getDummyPanel("Four"));
+		 * jac.addBar("Five", JAccordian.getDummyPanel("Five"));
+		 */
 		jac.setVisible(true);
 		jac.setSize(100, 100);
 		jac.setVisibleBar(0);
 
 		JInternalFrame internalFrame = new JInternalFrame(title, true);
 		internalFrame.setContentPane(jac);
-		//internalFrame.setContentPane(browser.getView().getComponent());
-		internalFrame.setLocation(640, 0);
+		// internalFrame.setContentPane(browser.getView().getComponent());
+		internalFrame.setLocation(640, 0/* offset */);
 		internalFrame.setSize(640, 720);
 		internalFrame.setVisible(true);
 		return internalFrame;
