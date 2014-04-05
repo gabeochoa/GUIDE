@@ -1,223 +1,157 @@
 package com.bitcamp;
 
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+/*
+ * Copyright (c) 1995, 2008, Oracle and/or its affiliates. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ *   - Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *
+ *   - Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *
+ *   - Neither the name of Oracle or the names of its
+ *     contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+ * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+ 
+/*
+ * TabbedPaneDemo.java requires one additional file:
+ *   images/middle.gif.
+ */
+ 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.KeyEvent;
 
-import javax.swing.AbstractAction;
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.InputMap;
-import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JInternalFrame;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
-import javax.swing.KeyStroke;
-
-public class ImprovedTabs extends JInternalFrame
-{
-
-	public static final Icon CLOSE_TAB_ICON = new ImageIcon(
-			"/closeTabButton.png");
-	public static final Icon PAGE_ICON = new ImageIcon("/closeTabButton.png");
-	private int tabCount = 0;
-
-	/**
-	 * Creates new ImprovedTabs
-	 */
-	public ImprovedTabs()
-	{
-		initComponents();
-	}
-
-	/**
-	 * Adds a component to a JTabbedPane with a little "close tab" button on the
-	 * right side of the tab.
-	 * 
-	 * @param tabbedPane
-	 *            the JTabbedPane
-	 * @param c
-	 *            any JComponent
-	 * @param title
-	 *            the title for the tab
-	 * @param icon
-	 *            the icon for the tab, if desired
-	 */
-	public static void addClosableTab(final JTabbedPane tabbedPane,
-			final JComponent c, final String title, final Icon icon)
-	{
-		// Add the tab to the pane without any label
-		tabbedPane.addTab(null, c);
-		int pos = tabbedPane.indexOfComponent(c);
-
-		// Create a FlowLayout that will space things 5px apart
-		FlowLayout f = new FlowLayout(FlowLayout.CENTER, 5, 0);
-
-		// Make a small JPanel with the layout and make it non-opaque
-		JPanel pnlTab = new JPanel(f);
-		pnlTab.setOpaque(false);
-
-		// Add a JLabel with title and the left-side tab icon
-		JLabel lblTitle = new JLabel(title);
-		lblTitle.setIcon(icon);
-
-		// Create a JButton for the close tab button
-		JButton btnClose = new JButton();
-		btnClose.setOpaque(false);
-
-		// Configure icon and rollover icon for button
-		btnClose.setRolloverIcon(CLOSE_TAB_ICON);
-		btnClose.setRolloverEnabled(true);
-		// btnClose.setIcon(RGBGrayFilter.getDisabledIcon(btnClose,
-		// CLOSE_TAB_ICON));
-
-		// Set border null so the button doesn't make the tab too big
-		btnClose.setBorder(null);
-
-		// Make sure the button can't get focus, otherwise it looks funny
-		btnClose.setFocusable(false);
-
-		// Put the panel together
-		pnlTab.add(lblTitle);
-		pnlTab.add(btnClose);
-
-		// Add a thin border to keep the image below the top edge of the tab
-		// when the tab is selected
-		pnlTab.setBorder(BorderFactory.createEmptyBorder(2, 0, 0, 0));
-
-		// Now assign the component for the tab
-		tabbedPane.setTabComponentAt(pos, pnlTab);
-
-		// Add the listener that removes the tab
-		ActionListener listener = new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				// The component parameter must be declared "final" so that it
-				// can be
-				// referenced in the anonymous listener class like this.
-				tabbedPane.remove(c);
-			}
-		};
-		btnClose.addActionListener(listener);
-
-		// Optionally bring the new tab to the front
-		tabbedPane.setSelectedComponent(c);
-
-		// -------------------------------------------------------------
-		// Bonus: Adding a <Ctrl-W> keystroke binding to close the tab
-		// -------------------------------------------------------------
-		AbstractAction closeTabAction = new AbstractAction()
-		{
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				tabbedPane.remove(c);
-			}
-		};
-
-		// Create a keystroke
-		KeyStroke controlW = KeyStroke.getKeyStroke("control W");
-
-		// Get the appropriate input map using the JComponent constants.
-		// This one works well when the component is a container.
-		InputMap inputMap = c
-				.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-
-		// Add the key binding for the keystroke to the action name
-		inputMap.put(controlW, "closeTab");
-
-		// Now add a single binding for the action name to the anonymous action
-		c.getActionMap().put("closeTab", closeTabAction);
-	}
-
-	/**
-	 * This method is called from within the constructor to initialize the form.
-	 * WARNING: Do NOT modify this code. The content of this method is always
-	 * regenerated by the Form Editor.
-	 */
-	@SuppressWarnings("unchecked")
-	// <editor-fold defaultstate="collapsed" desc="Generated Code">
-	private void initComponents()
-	{
-
-		tabbedPane = new javax.swing.JTabbedPane();
-		jScrollPane1 = new javax.swing.JScrollPane();
-		jTextArea1 = new javax.swing.JTextArea();
-		buttonPanel = new javax.swing.JPanel();
-		createTabButton = new javax.swing.JButton();
-
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		setPreferredSize(new java.awt.Dimension(800, 400));
-
-		jTextArea1.setEditable(false);
-		jTextArea1.setColumns(20);
-		jTextArea1.setLineWrap(true);
-		jTextArea1.setRows(5);
-		jTextArea1
-				.setText("This tab cannot be closed.\n\nClick on the \"Add New Tab\" button a few times.\n\nTry closing the tabs with the small buttons.\nTry closing the tabs with <Ctrl-W>.");
-		jScrollPane1.setViewportView(jTextArea1);
-
-		tabbedPane.addTab("About", jScrollPane1);
-
-		getContentPane().add(tabbedPane, java.awt.BorderLayout.CENTER);
-
-		createTabButton.setText("Add New Tab");
-		createTabButton.addActionListener(new java.awt.event.ActionListener()
-		{
-			public void actionPerformed(java.awt.event.ActionEvent evt)
-			{
-				createTabButtonActionPerformed(evt);
-			}
-		});
-		buttonPanel.add(createTabButton);
-
-		getContentPane().add(buttonPanel, java.awt.BorderLayout.SOUTH);
-
-		pack();
-	}// </editor-fold>
-
-	private void createTabButtonActionPerformed(java.awt.event.ActionEvent evt)
-	{
-		System.out.println("Add new tab!");
-		tabCount++;
-		JScrollPane scrollPane = new JScrollPane(new JTextArea(
-				"New tab number " + tabCount));
-		Icon icon = PAGE_ICON;
-		addClosableTab(tabbedPane, scrollPane, "Tab " + tabCount, icon);
-	}
-
-	/**
-	 * @param args
-	 *            the command line arguments
-	 */
-	// public static void main(String args[]) {
-	// try {
-	// PlasticLookAndFeel laf = new Plastic3DLookAndFeel();
-	// PlasticLookAndFeel.setCurrentTheme(new ExperienceBlue());
-	// UIManager.setLookAndFeel(laf);
-	// } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-	// ex.printStackTrace();
-	// }
-	//
-	// java.awt.EventQueue.invokeLater(new Runnable() {
-	// @Override
-	// public void run() {
-	// new ImprovedTabs().setVisible(true);
-	// }
-	// });
-	// }
-	// Variables declaration - do not modify
-	private javax.swing.JPanel buttonPanel;
-	private javax.swing.JButton createTabButton;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JTextArea jTextArea1;
-	private javax.swing.JTabbedPane tabbedPane;
-	// End of variables declaration
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+ 
+public class ImprovedTabs extends JPanel {
+    public ImprovedTabs() {
+        super(new GridLayout(1, 1));
+         
+        JTabbedPane tabbedPane = new JTabbedPane();
+        ImageIcon icon = createImageIcon("images/middle.gif");
+         
+        JComponent panel1 = makeTextPanel("Panel #1");
+        tabbedPane.addTab("Tab 1", icon, panel1,
+                "Does nothing");
+        tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
+         
+        JComponent panel2 = makeTextPanel("Panel #2");
+        tabbedPane.addTab("Tab 2", icon, panel2,
+                "Does twice as much nothing");
+        tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
+         
+        JComponent panel3 = makeTextPanel("Panel #3");
+        tabbedPane.addTab("Tab 3", icon, panel3,
+                "Still does nothing");
+        tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
+         
+        JComponent panel4 = makeTextPanel(
+                "Panel #4 (has a preferred size of 410 x 50).");
+        panel4.setPreferredSize(new Dimension(410, 50));
+        tabbedPane.addTab("Tab 4", icon, panel4,
+                "Does nothing at all");
+        tabbedPane.setMnemonicAt(3, KeyEvent.VK_4);
+         
+        //Add the tabbed pane to this panel.
+        add(tabbedPane);
+         
+        //The following line enables to use scrolling tabs.
+        tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+    }
+     
+    protected JComponent makeTextPanel(String text) {
+        JPanel panel = new JPanel(false);
+        JLabel filler = new JLabel(text);
+        filler.setHorizontalAlignment(JLabel.CENTER);
+        panel.setLayout(new GridLayout(1, 1));
+        panel.add(filler);
+        return panel;
+    }
+    
+    protected static JComponent makeTextPanel1(String text) {
+        JPanel panel = new JPanel(false);
+        JLabel filler = new JLabel(text);
+        filler.setHorizontalAlignment(JLabel.CENTER);
+        panel.setLayout(new GridLayout(1, 1));
+        panel.add(filler);
+        return panel;
+    }
+     
+    /** Returns an ImageIcon, or null if the path was invalid. */
+    protected static ImageIcon createImageIcon(String path) {
+        java.net.URL imgURL = ImprovedTabs.class.getResource(path);
+        if (imgURL != null) {
+            return new ImageIcon(imgURL);
+        } else {
+            System.err.println("Couldn't find file: " + path);
+            return null;
+        }
+    }
+    
+    protected static ImageIcon createImageIcon1(String path) {
+        java.net.URL imgURL = ImprovedTabs.class.getResource(path);
+        if (imgURL != null) {
+            return new ImageIcon(imgURL);
+        } else {
+            System.err.println("Couldn't find file: " + path);
+            return null;
+        }
+    }
+     
+    /**
+     * Create the GUI and show it.  For thread safety,
+     * this method should be invoked from
+     * the event dispatch thread.
+     */
+    private static void createAndShowGUI() {
+        //Create and set up the window.
+        JFrame frame = new JFrame("TabbedPaneDemo");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+         
+        //Add content to the window.
+        frame.add(new ImprovedTabs(), BorderLayout.CENTER);
+         
+        //Display the window.
+        frame.pack();
+        frame.setVisible(true);
+    }
+     
+    public static void main(String[] args) {
+        //Schedule a job for the event dispatch thread:
+        //creating and showing this application's GUI.
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                //Turn off metal's use of bold fonts
+        UIManager.put("swing.boldMetal", Boolean.FALSE);
+        createAndShowGUI();
+            }
+        });
+    }
 }

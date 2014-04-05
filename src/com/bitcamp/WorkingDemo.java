@@ -6,10 +6,16 @@ package com.bitcamp;
  */
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.KeyEvent;
 
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.WindowConstants;
 
@@ -25,6 +31,7 @@ public class WorkingDemo
 	{
 		JDesktopPane desktopPane = new JDesktopPane();
 		JInternalFrame codeTabs = initalizeCodeTabs(desktopPane);
+		desktopPane.add(codeTabs);
 		desktopPane.add(createInternalFrame("Browser Two",
 				"http://www.cplusplus.com", 100));
 		DesktopScrollPane scrollPane = new DesktopScrollPane(desktopPane);
@@ -39,26 +46,19 @@ public class WorkingDemo
 
 	private static JInternalFrame initalizeCodeTabs(JDesktopPane deskPa)
 	{
-
-		// // TODO Auto-generated method stub
-		JTabbedPane myTabs = new JTabbedPane();
-		deskPa.add(createCodeFrame());
-		ImprovedTabs t = new ImprovedTabs();
-		t.addClosableTab(myTabs, deskPa, "New", ImprovedTabs.CLOSE_TAB_ICON);
-
-		// myTabs.add("New", deskPa);
-		//
-		// AbstractAction closeTabAction = new AbstractAction()
-		// {
-		// @Override
-		// public void actionPerformed(ActionEvent e)
-		// {
-		// myTabs.remove(0);
-		// }
-		// };
-		// myTabs.getInputMap().put(KeyStroke.getKeyStroke("F2"), "closeTab");
-		// myTabs.getActionMap().put("clostTab", closeTabAction);
-		return t;
+		
+		
+		
+		
+		
+		
+		CodeViewComponent internalFrame = new CodeViewComponent();
+		internalFrame.setContentPane(new ImprovedTabs());
+		internalFrame.setLocation(0, 0);
+		internalFrame.setSize(640, 720);
+		internalFrame.setVisible(true);
+		internalFrame.pack();
+		return internalFrame;
 	}
 
 	private static JInternalFrame createInternalFrame(String title, String url,
