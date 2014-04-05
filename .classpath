@@ -18,5 +18,6 @@
 	<classpathentry kind="lib" path="jxweb/jxbrowser-mac-4.3.jar"/>
 	<classpathentry kind="lib" path="jxweb/jxbrowser-win-4.3.jar"/>
 	<classpathentry kind="lib" path="jxweb/license.jar"/>
+	<classpathentry kind="lib" path="i18n"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
