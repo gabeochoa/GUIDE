@@ -5,20 +5,8 @@ package com.bitcamp;
  * and CONFIDENTIAL. Use is subject to license terms.
  */
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.event.KeyEvent;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JDesktopPane;
-import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.WindowConstants;
 
 import com.teamdev.jxbrowser.chromium.Browser;
 import com.teamdev.jxbrowser.chromium.BrowserFactory;
@@ -38,17 +26,15 @@ public class WorkingDemo
 		desktopPane.add(createInternalFrame("Browser Two",
 				"http://www.cplusplus.com", 100));
 		DesktopScrollPane scrollPane = new DesktopScrollPane(desktopPane);
-		JFrame frame = new JFrame();
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		frame.add(scrollPane, BorderLayout.CENTER);
-		frame.setSize(1280, 720);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
+		wind frame = new wind(scrollPane);
+		desktopPane.add(frame);
 		scrollPane.resizeDesktop();
 		while(true)
 			update();
 	}
 
+	 
+			
 	private static void update()
 	{
 		System.out.println(imp.textArea.getText());
@@ -58,8 +44,6 @@ public class WorkingDemo
 	{
 		CodeViewComponent internalFrame = new CodeViewComponent();
 		imp = new ImprovedTabs();
-        JButton mybutton = new JButton("Refresh");
-        internalFrame.add(mybutton);
 		internalFrame.setContentPane(imp);
 		internalFrame.setLocation(0, 0);
 		internalFrame.setSize(640, 720);
