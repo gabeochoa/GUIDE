@@ -23,6 +23,7 @@ public class WorkingDemo
 {
 
 	public static JAccordian jac = null;
+	public static JInternalFrame internalFrameBr;
 	private static ImprovedTabs imp;
 	public static HashMap<String, String> keywordToUrl = new HashMap<String, String>();
 
@@ -66,6 +67,11 @@ public class WorkingDemo
 		return jac;
 	}
 
+	public static JInternalFrame getBrowserFrame()
+	{
+		return internalFrameBr;
+	}
+
 	private static JInternalFrame initalizeCodeTabs(JDesktopPane deskPa)
 	{
 		CodeViewComponent internalFrame = new CodeViewComponent();
@@ -95,13 +101,13 @@ public class WorkingDemo
 		jac.setSize(100, 100);
 		jac.setVisibleBar(0);
 
-		JInternalFrame internalFrame = new JInternalFrame(title, true);
-		internalFrame.setContentPane(jac);
+		internalFrameBr = new JInternalFrame(title, true);
+		internalFrameBr.setContentPane(jac);
 		// internalFrame.setContentPane(browser.getView().getComponent());
-		internalFrame.setLocation(640, 0/* offset */);
-		internalFrame.setSize(640, 720);
-		internalFrame.setVisible(true);
-		return internalFrame;
+		internalFrameBr.setLocation(640, 0/* offset */);
+		internalFrameBr.setSize(640, 720);
+		internalFrameBr.setVisible(true);
+		return internalFrameBr;
 	}
 
 	private static JInternalFrame createCodeFrame()
