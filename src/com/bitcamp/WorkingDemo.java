@@ -45,6 +45,10 @@ public class WorkingDemo
 		// update();
 	}
 	
+	public static JInternalFrame getInternalFrame(){
+		return internalFrameBr;
+	}
+	
 	public static DesktopScrollPane getScrolly()
 	{
 		return scrollyTheScrollPane;
@@ -71,6 +75,10 @@ public class WorkingDemo
 	public static JAccordian getJacced()
 	{
 		return jac;
+	}
+	
+	public static void setJacced(JAccordian jac2){
+		WorkingDemo.jac = jac2;
 	}
 
 	public static JInternalFrame getBrowserFrame()

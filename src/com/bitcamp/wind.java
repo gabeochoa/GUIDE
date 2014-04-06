@@ -207,6 +207,9 @@ public class wind extends JFrame implements ActionListener
 		 * program).
 		 */
 		JAccordian jac = WorkingDemo.getJacced();
+		jac.invalidate();
+		JAccordian jac2 = new JAccordian();
+		WorkingDemo.setJacced(jac2);
 		Browser brow = BrowserFactory.create();
 		String selectedText = WorkingDemo.updateS();
 		String url = "http://www.cplusplus.com";
@@ -226,10 +229,12 @@ public class wind extends JFrame implements ActionListener
 		 */
 
 		brow.loadURL(url);
-		jac.addBar(selectedText, brow.getView().getComponent());
-		jac.setLocation(0, 0);
-		jac.setSize(640, 720);
-		jac.setVisible(true);
-		WorkingDemo.getScrolly().resizeDesktop();
+		jac2.addBar(selectedText, brow.getView().getComponent());
+		jac2.setLocation(0, 0);
+		jac2.setSize(640, 720);
+		jac2.setVisible(true);
+		jac2.validate();
+		WorkingDemo.getInternalFrame().setContentPane(jac2);
+		//WorkingDemo.getScrolly().resizeDesktop();
 	}
 }
