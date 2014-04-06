@@ -26,6 +26,7 @@ public class WorkingDemo
 	public static JInternalFrame internalFrameBr;
 	private static ImprovedTabs imp;
 	public static HashMap<String, String> keywordToUrl = new HashMap<String, String>();
+	public static DesktopScrollPane scrollyTheScrollPane;
 
 	public static void main(String[] args) throws IOException
 	{
@@ -36,12 +37,17 @@ public class WorkingDemo
 		desktopPane.add(codeTabs);
 		desktopPane.add(createInternalFrame("Browser Two",
 				"http://www.cplusplus.com", 100));
-		DesktopScrollPane scrollPane = new DesktopScrollPane(desktopPane);
+		scrollyTheScrollPane = new DesktopScrollPane(desktopPane);
 		wind frame = new wind(desktopPane);
 		desktopPane.add(frame);
-		scrollPane.resizeDesktop();
+		scrollyTheScrollPane.resizeDesktop();
 		// while(true)
 		// update();
+	}
+	
+	public static DesktopScrollPane getScrolly()
+	{
+		return scrollyTheScrollPane;
 	}
 
 	// private static void update()

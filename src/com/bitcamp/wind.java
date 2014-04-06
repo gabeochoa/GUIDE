@@ -230,5 +230,6 @@ public class wind extends JFrame implements ActionListener
 		jac.setLocation(0, 0);
 		jac.setSize(640, 720);
 		jac.setVisible(true);
+		WorkingDemo.getScrolly().resizeDesktop();
 	}
 }
