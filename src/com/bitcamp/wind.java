@@ -224,9 +224,21 @@ public class wind extends JFrame implements ActionListener
 		Browser brow = BrowserFactory.create();
 		String selectedText = WorkingDemo.updateS();
 		String url = "http://www.cplusplus.com";
-		if(WorkingDemo.keywordToUrl.containsKey(selectedText))
+		
+		boolean s = false;
+		String corkey = ""; 
+		for(String key : WorkingDemo.keywordToUrl.keySet())
+			if(selectedText.contains(key))
+			{
+				corkey = key;
+				s = true;
+			}
+		System.out.println("\n\n\n\n\n\n\n"+s);
+		
+		//if(WorkingDemo.keywordToUrl.containsKey(selectedText))
+		if(s)
 		{
-			url = WorkingDemo.keywordToUrl.get(selectedText);
+			url = WorkingDemo.keywordToUrl.get(corkey);
 		}
 		else
 		{

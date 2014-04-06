@@ -55,10 +55,10 @@ public class WorkingDemo
 		return scrollyTheScrollPane;
 	}
 
-	// private static void update()
-	// {
-	// System.out.println(imp.textArea.getText());
-	// }
+	private static String update()
+	{
+		return imp.textArea.getText();
+	 }
 
 	public static String updateS()
 	{
