@@ -73,6 +73,18 @@ public class WorkingDemo
 		 */
 		return imp.textArea.getSelectedText();
 	}
+	public static void setText(String s)
+	{
+		imp.textArea.setText(s);
+	}
+	public static void clearText()
+	{
+	setText("");
+	}
+	public static void appentText(String s)
+	{
+		imp.textArea.append(s+"\n");
+	}
 
 	public static String getRawCodeTextBlock()
 	{

@@ -5,11 +5,16 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFileChooser;
@@ -119,6 +124,41 @@ public class wind extends JFrame implements ActionListener
 	            File file = fc.getSelectedFile();
 	            //This is where a real application would open the file.
 	            System.out.println("Opening: " + file.getName() + ".");
+	            
+	    		InputStream    fis = null;
+	    		BufferedReader br;
+	    		String         line;
+	    		try
+				{
+					fis = new FileInputStream(file.getPath());
+				} catch (FileNotFoundException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+	    		br = new BufferedReader(new InputStreamReader(fis, Charset.forName("UTF-8")));
+	    		try
+				{
+					while ((line = br.readLine()) != null) {
+					    //filetext.add(line);
+					    WorkingDemo.appentText(line);
+					}
+				} catch (IOException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+	    		// Done with the file
+	    		try
+				{
+					br.close();
+				} catch (IOException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+	    		br = null;
+	    		fis = null;
 	        } else {
 	        	System.out.println("Open command cancelled by user.");
 	        }
