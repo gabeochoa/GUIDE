@@ -14,7 +14,6 @@ import java.util.Set;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -207,9 +206,8 @@ public class wind extends JFrame implements ActionListener
 		 * The text the user entered into the CodeViewComponent (left side of
 		 * program).
 		 */
-		Browser brow = BrowserFactory.create();
 		JAccordian jac = WorkingDemo.getJacced();
-		jac.removeAll();
+		Browser brow = BrowserFactory.create();
 		String selectedText = WorkingDemo.updateS();
 		String url = "http://www.cplusplus.com";
 		if(WorkingDemo.keywordToUrl.containsKey(selectedText))
@@ -232,15 +230,5 @@ public class wind extends JFrame implements ActionListener
 		jac.setLocation(0, 0);
 		jac.setSize(640, 720);
 		jac.setVisible(true);
-		JInternalFrame containerFrame = WorkingDemo.getBrowserFrame();
-		// containerFrame.removeAll();
-		// containerFrame.add(jac);
-
-		jac.revalidate();
-		jac.repaint();
-
-		containerFrame.revalidate();
-		containerFrame.repaint();
-
 	}
 }
