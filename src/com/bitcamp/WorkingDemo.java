@@ -28,6 +28,7 @@ public class WorkingDemo
 	public static JAccordian jac = null;
 	public static JInternalFrame internalFrameBr;
 	public static JInternalFrame rdioFrame;
+	public static JInternalFrame codeTabs;
 	public static Browser rdioBrowser;
 	private static ImprovedTabs imp;
 	public static HashMap<String, String> keywordToUrl = new HashMap<String, String>();
