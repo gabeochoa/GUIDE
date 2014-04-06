@@ -79,9 +79,8 @@ public class wind extends JFrame implements ActionListener
 
 		// Set up the Compile and Run item
 		menuItem = new JMenuItem("Compile and Run");
-		menuItem.setMnemonic(KeyEvent.VK_M);
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M,
-				ActionEvent.ALT_MASK));
+		menuItem.setMnemonic(KeyEvent.VK_F5);
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5,0));
 		menuItem.setActionCommand("Compile and Run");
 		menuItem.addActionListener(this);
 		buildmenu.add(menuItem);
