@@ -39,16 +39,18 @@ public class wind extends JFrame implements ActionListener
 	private static final long serialVersionUID = 7447036913279756726L;
 	public String direc = "";
 	public String dir = "nofile";
+	JDesktopPane deskpane;
 	public wind(JDesktopPane sc)
 	{
 		setTitle("guIDE");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		add(sc, BorderLayout.CENTER);
-		setSize(1280, 720);
+		setSize(1280, 780);
 		setLocationRelativeTo(null);
 		setJMenuBar(createMenuBar(this));
 		setVisible(true);
-
+		
+		deskpane = sc;
 		direc = System.getProperty("user.dir");
 	}
 
@@ -209,6 +211,11 @@ public class wind extends JFrame implements ActionListener
 				}
 				br = null;
 				fis = null;
+				
+			
+				WorkingDemo.codeTabs = WorkingDemo.initalizeCodeTabs(deskpane, dir);
+				
+			
 			} else {
 				System.out.println("Open command cancelled by user.");
 			}

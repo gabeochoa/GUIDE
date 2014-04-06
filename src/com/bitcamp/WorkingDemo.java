@@ -33,6 +33,7 @@ public class WorkingDemo
 	public static HashMap<String, String> keywordToUrl = new HashMap<String, String>();
 	public static DesktopScrollPane scrollyTheScrollPane;
 	private static final int RDIO_HEIGHT = 75;
+	private static final int SIDE_WIDTH = 632;
 	
 	public static void main(String[] args) throws IOException
 	{
@@ -43,8 +44,8 @@ public class WorkingDemo
 		LoggerProvider.getChromiumProcessLogger().setLevel(Level.OFF);
 		
 		JDesktopPane desktopPane = new JDesktopPane();
-		JInternalFrame codeTabs = initalizeCodeTabs(desktopPane);
-		codeTabs.setSize(640, 700);
+		codeTabs = initalizeCodeTabs(desktopPane);
+		codeTabs.setSize(SIDE_WIDTH, 720);
 		
 		desktopPane.add(codeTabs);
 		desktopPane.add(createInternalFrame("Browser",
@@ -144,7 +145,17 @@ public class WorkingDemo
 	private static JInternalFrame initalizeCodeTabs(JDesktopPane deskPa)
 	{
 		CodeViewComponent internalFrame = new CodeViewComponent();
-		imp = new ImprovedTabs();
+		internalFrame.setContentPane(new ImprovedTabs());
+		internalFrame.setLocation(0, 0);
+		internalFrame.setVisible(true);
+		internalFrame.pack();
+		return internalFrame;
+	}
+	
+	public static JInternalFrame initalizeCodeTabs(JDesktopPane deskPa, String s)
+	{
+		CodeViewComponent internalFrame = new CodeViewComponent();
+		imp = new ImprovedTabs(s);
 		internalFrame.setContentPane(imp);
 		internalFrame.setLocation(0, 0);
 		internalFrame.setSize(640, 720);
@@ -170,10 +181,10 @@ public class WorkingDemo
 
 		internalFrameBr = new JInternalFrame(title, true);
 		internalFrameBr.setContentPane(jac);
-		// internalFrame.setContentPane(browser.getView().getComponent());
-		internalFrameBr.setLocation(640, RDIO_HEIGHT/* offset */);
-		internalFrameBr.setSize(640, 720 - RDIO_HEIGHT);
+		internalFrameBr.setLocation(SIDE_WIDTH, RDIO_HEIGHT);
+		internalFrameBr.setSize(SIDE_WIDTH, 720 - RDIO_HEIGHT);
 		internalFrameBr.setVisible(true);
+		
 		return internalFrameBr;
 	}
 
@@ -186,8 +197,8 @@ public class WorkingDemo
 		
 		rdioFrame = new JInternalFrame(title, false);
 		rdioFrame.setContentPane(rdioBrowser.getView().getComponent());
-		rdioFrame.setLocation(640, 0);
-		rdioFrame.setSize(640, RDIO_HEIGHT);
+		rdioFrame.setLocation(SIDE_WIDTH, 0);
+		rdioFrame.setSize(SIDE_WIDTH, RDIO_HEIGHT);
 		rdioFrame.setVisible(true);
 		
 		rdioBrowser.addLoadListener(new LoadAdapter() {
