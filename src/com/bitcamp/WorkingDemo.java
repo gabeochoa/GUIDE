@@ -39,6 +39,8 @@ public class WorkingDemo
 		desktopPane.add(createInternalFrame("Browser",
 				"http://www.cplusplus.com", 100));
 		scrollyTheScrollPane = new DesktopScrollPane(desktopPane);
+		rdioInternalFrame rint = new rdioInternalFrame();
+		desktopPane.add(rint);
 		wind frame = new wind(desktopPane);
 		desktopPane.add(frame);
 		scrollyTheScrollPane.resizeDesktop();
@@ -79,7 +81,7 @@ public class WorkingDemo
 	}
 	public static void clearText()
 	{
-	setText("");
+		setText("");
 	}
 	public static void appentText(String s)
 	{

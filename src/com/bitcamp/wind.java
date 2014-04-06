@@ -12,9 +12,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFileChooser;
@@ -23,6 +23,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 import com.teamdev.jxbrowser.chromium.Browser;
@@ -31,6 +32,7 @@ import com.teamdev.jxbrowser.chromium.BrowserFactory;
 public class wind extends JFrame implements ActionListener
 {
 	public String direc = "";
+	public String dir = "";
 	private JDesktopPane daddy;
 
 	public wind(JDesktopPane sc)
@@ -44,10 +46,7 @@ public class wind extends JFrame implements ActionListener
 		setVisible(true);
 
 		daddy = sc;
-
-
 		direc = System.getProperty("user.dir");
-
 	}
 
 	protected JMenuBar createMenuBar(JFrame frame)
@@ -77,7 +76,6 @@ public class wind extends JFrame implements ActionListener
 		menuItem.setActionCommand("quit");
 		menuItem.addActionListener(this);
 		filemenu.add(menuItem);
-
 
 		JMenu buildmenu = new JMenu("Build");
 		menuBar.add(buildmenu);
@@ -130,6 +128,7 @@ public class wind extends JFrame implements ActionListener
 	    		String         line;
 	    		try
 				{
+	    			dir = file.getPath();
 					fis = new FileInputStream(file.getPath());
 				} catch (FileNotFoundException e1)
 				{
@@ -182,6 +181,10 @@ public class wind extends JFrame implements ActionListener
 				e1.printStackTrace();
 			}
 			catch(IOException e1)
+			{
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (InterruptedException e1)
 			{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -327,30 +330,54 @@ public class wind extends JFrame implements ActionListener
 		jac2.setVisible(true);
 		jac2.validate();
 		WorkingDemo.getInternalFrame().setContentPane(jac2);
-		// WorkingDemo.getScrolly().resizeDesktop();
+		//WorkingDemo.getScrolly().resizeDesktop();
 	}
 
-	public void compileCodeViewCode() throws IOException
+	public void compileCodeViewCode() throws IOException, InterruptedException
 	{
+
+		ArrayList<String> command = new ArrayList<String>();
+	   	command.add("g++");
+	    command.add("-o");
+	    command.add("avc");
+	    command.add("helloworld.cpp");
+	    SysComEx sce = new SysComEx(command);
+	    		
+	    int result = 0;
+		System.out.println("result val: " + result);
+		// get the output from the command
+		StringBuilder stdout = sce.getStandardOutputFromCommand();
+		StringBuilder stderr = sce.getStandardErrorFromCommand();
+
+//		// print the output from the command
+		System.out.println("STDOUT");
+		System.out.println(stdout);
+		System.out.println("STDERR");
+		System.out.println(stderr);
+		
 		/* Our code */
 		String code = WorkingDemo.getRawCodeTextBlock();
 
 		/* Our source file */
-		String sourceName = "seg-fault.cpp";
-		String executableName = "seggyTheSegFault.yolo";
-		PrintWriter writer = new PrintWriter("seg-fault.cpp", "UTF-8");
-		writer.println(code);
-		writer.close();
+
+		String[] f = dir.contains("\\") ? dir.split("\\") : dir.split("/");
+		String sourceName = f[f.length-1];
+		String executableName = "outputexec";
+		//PrintWriter writer = new PrintWriter(dir, "UTF-8");
+		//writer.println(code);
+		//writer.close();
 
 		/*
 		 * Write the compile command to the terminal.
 		 */
-		StringBuilder command = new StringBuilder("g++ -o ");
-		command.append(sourceName);
-		command.append(executableName);
-		command.append(sourceName);
-		String cmdString = command.toString();
-		ProcessBuilder pb = new ProcessBuilder(cmdString);
-		Process compileDatCode = pb.start();
+//		ArrayList<String> command = new ArrayList<String>();
+//		command.add("usr/var/make ");
+//		command.add("g++");
+//		command.add(" -o ");
+//		command.add(sourceName + " ");
+//		command.add(executableName + " ");
+//		command.add(sourceName);
+		//ProcessBuilder pb = new ProcessBuilder(command);
+		//Process compileDatCode = pb.start();
 	}
 }

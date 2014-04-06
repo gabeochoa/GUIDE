@@ -28,9 +28,6 @@ public class rdioInternalFrame extends JInternalFrame
 				true, // closable
 				true, // maximizable
 				true);// iconifiable
-
-		// ...Create the GUI and put it in the window...
-
 		// ...Then set the window size or call pack...
 		setSize(width, height);
 
@@ -60,16 +57,13 @@ public class rdioInternalFrame extends JInternalFrame
 
 	public rdioInternalFrame()
 	{
-		super("CodePanel ", true, // resizable
+		super("rdio", true, // resizable
 				true, // closable
 				true, // maximizable
 				true);// iconifiable
 
-		// ...Create the GUI and put it in the window...
-
 		// ...Then set the window size or call pack...
 		setSize(width, height);
-
 		// Set the window's location.
 		setLocation(xOffset, yOffset);
 
