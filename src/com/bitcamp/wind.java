@@ -58,6 +58,15 @@ public class wind extends JFrame implements ActionListener
 		menuItem.addActionListener(this);
 		menu.add(menuItem);
 
+		// Set up the Compile and Run item
+		menuItem = new JMenuItem("Compile and Run");
+		menuItem.setMnemonic(KeyEvent.VK_M);
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M,
+				ActionEvent.ALT_MASK));
+		menuItem.setActionCommand("Compile and Run");
+		menuItem.addActionListener(this);
+		menu.add(menuItem);
+		
 		// Set up the second menu item.
 		menuItem = new JMenuItem("Quit");
 		menuItem.setMnemonic(KeyEvent.VK_Q);
@@ -95,6 +104,11 @@ public class wind extends JFrame implements ActionListener
 			// e1.printStackTrace();
 			// }
 			// System.out.println("R");
+		}
+		//Put Compile and Run stuff here
+		else if("Compile and Run".equals(e.getActionCommand()))
+		{
+			//do stuff
 		}
 		else
 		{ // quit
@@ -216,6 +230,9 @@ public class wind extends JFrame implements ActionListener
 		if(WorkingDemo.keywordToUrl.containsKey(selectedText))
 		{
 			url = WorkingDemo.keywordToUrl.get(selectedText);
+		}
+		else{
+			return;
 		}
 
 		// String stringComponents[] = rawText.split("\\s+");
