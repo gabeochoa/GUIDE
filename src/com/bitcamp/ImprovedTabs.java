@@ -73,28 +73,28 @@ public class ImprovedTabs extends JPanel
 		RTextScrollPane sp = new RTextScrollPane(textArea);
 
 		// Refresh button
-		JButton mybutton = new JButton("Refresh");
+		//JButton mybutton = new JButton("Refresh");
 		// tabbedPane.add(mybutton);
 		// Compile and Run
-		JButton mybutton2 = new JButton("Compile and Run");
+		//JButton mybutton2 = new JButton("Compile and Run");
 
-		JComponent panel1 = makeTextPanel("Panel #1");
+		//JComponent panel1 = makeTextPanel("Panel #1");
 		tabbedPane.addTab("Tab 1", icon, sp);
 		System.out.println(textArea.getText());
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 
-		JComponent panel2 = makeTextPanel("Panel #2");
-		tabbedPane.addTab("Tab 2", icon, panel2);
-		tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
-
-		JComponent panel3 = makeTextPanel("Panel #3");
-		tabbedPane.addTab("Tab 3", icon, panel3);
-		tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
-
-		JComponent panel4 = makeTextPanel("Panel #4 (has a preferred size of 410 x 50).");
-		panel4.setPreferredSize(new Dimension(410, 50));
-		tabbedPane.addTab("Tab 4", icon, panel4);
-		tabbedPane.setMnemonicAt(3, KeyEvent.VK_4);
+//		JComponent panel2 = makeTextPanel("Panel #2");
+//		tabbedPane.addTab("Tab 2", icon, panel2);
+//		tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
+//
+//		JComponent panel3 = makeTextPanel("Panel #3");
+//		tabbedPane.addTab("Tab 3", icon, panel3);
+//		tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
+//
+//		JComponent panel4 = makeTextPanel("Panel #4 (has a preferred size of 410 x 50).");
+//		panel4.setPreferredSize(new Dimension(410, 50));
+//		tabbedPane.addTab("Tab 4", icon, panel4);
+//		tabbedPane.setMnemonicAt(3, KeyEvent.VK_4);
 
 		// Add the tabbed pane to this panel.
 		add(tabbedPane);
@@ -102,6 +102,11 @@ public class ImprovedTabs extends JPanel
 		// The following line enables to use scrolling tabs.
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
+	}
+	
+	public void addPanel(String filename)
+	{
+		
 	}
 
 	protected JComponent makeTextPanel(String text)
@@ -170,19 +175,19 @@ public class ImprovedTabs extends JPanel
 		frame.pack();
 		frame.setVisible(true);
 	}
-
-	public static void main(String[] args)
-	{
-		// Schedule a job for the event dispatch thread:
-		// creating and showing this application's GUI.
-		SwingUtilities.invokeLater(new Runnable()
-		{
-			public void run()
-			{
-				// Turn off metal's use of bold fonts
-				UIManager.put("swing.boldMetal", Boolean.FALSE);
-				createAndShowGUI();
-			}
-		});
-	}
+//
+//	public static void main(String[] args)
+//	{
+//		// Schedule a job for the event dispatch thread:
+//		// creating and showing this application's GUI.
+//		SwingUtilities.invokeLater(new Runnable()
+//		{
+//			public void run()
+//			{
+//				// Turn off metal's use of bold fonts
+//				UIManager.put("swing.boldMetal", Boolean.FALSE);
+//				createAndShowGUI();
+//			}
+//		});
+//	}
 }

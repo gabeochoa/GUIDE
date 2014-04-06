@@ -33,9 +33,10 @@ public class WorkingDemo
 		initializeURL_Map();
 		JDesktopPane desktopPane = new JDesktopPane();
 		JInternalFrame codeTabs = initalizeCodeTabs(desktopPane);
-		codeTabs.setSize(640, 720);
+		codeTabs.setSize(640, 700);
+		
 		desktopPane.add(codeTabs);
-		desktopPane.add(createInternalFrame("Browser Two",
+		desktopPane.add(createInternalFrame("Browser",
 				"http://www.cplusplus.com", 100));
 		scrollyTheScrollPane = new DesktopScrollPane(desktopPane);
 		wind frame = new wind(desktopPane);

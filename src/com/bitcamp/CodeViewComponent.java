@@ -30,7 +30,7 @@ public class CodeViewComponent extends JInternalFrame
 		cp.add(sp);
 
 		setContentPane(cp);
-		setTitle("Code View");
+		setTitle("Code");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		pack();
 		// setLocationRelativeTo(null);

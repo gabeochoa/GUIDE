@@ -1,15 +1,18 @@
 package com.bitcamp;
 
+
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
 import javax.swing.JDesktopPane;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -22,11 +25,12 @@ import com.teamdev.jxbrowser.chromium.BrowserFactory;
 
 public class wind extends JFrame implements ActionListener
 {
-
+	public String direc = "";
 	private JDesktopPane daddy;
 
 	public wind(JDesktopPane sc)
 	{
+		setTitle("guIDE");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		add(sc, BorderLayout.CENTER);
 		setSize(1280, 720);
@@ -35,34 +39,30 @@ public class wind extends JFrame implements ActionListener
 		setVisible(true);
 
 		daddy = sc;
+
+
+		direc = System.getProperty("user.dir");
+
 	}
 
 	protected JMenuBar createMenuBar(JFrame frame)
 	{
 		JMenuBar menuBar = new JMenuBar();
+		JMenuItem menuItem;
 
 		// Set up the lone menu.
-		JMenu menu = new JMenu("Document");
-		menu.setMnemonic(KeyEvent.VK_D);
-		menuBar.add(menu);
-
-		// Set up the first menu item.
-		JMenuItem menuItem = new JMenuItem("Refresh");
-		menuItem.setMnemonic(KeyEvent.VK_N);
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
-				ActionEvent.ALT_MASK));
-		menuItem.setActionCommand("refresh");
-		menuItem.addActionListener(this);
-		menu.add(menuItem);
+		JMenu filemenu = new JMenu("File");
+		//filemenu.setMnemonic(KeyEvent.VK_D);
+		menuBar.add(filemenu);
 
 		// Set up the Compile and Run item
-		menuItem = new JMenuItem("Compile and Run");
-		menuItem.setMnemonic(KeyEvent.VK_M);
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M,
+		menuItem = new JMenuItem("Open");
+		menuItem.setMnemonic(KeyEvent.VK_O);
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
 				ActionEvent.ALT_MASK));
-		menuItem.setActionCommand("Compile and Run");
+		menuItem.setActionCommand("Open");
 		menuItem.addActionListener(this);
-		menu.add(menuItem);
+		filemenu.add(menuItem);
 
 		// Set up the second menu item.
 		menuItem = new JMenuItem("Quit");
@@ -71,7 +71,33 @@ public class wind extends JFrame implements ActionListener
 				ActionEvent.ALT_MASK));
 		menuItem.setActionCommand("quit");
 		menuItem.addActionListener(this);
-		menu.add(menuItem);
+		filemenu.add(menuItem);
+
+
+		JMenu buildmenu = new JMenu("Build");
+		menuBar.add(buildmenu);
+
+		// Set up the Compile and Run item
+		menuItem = new JMenuItem("Compile and Run");
+		menuItem.setMnemonic(KeyEvent.VK_M);
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M,
+				ActionEvent.ALT_MASK));
+		menuItem.setActionCommand("Compile and Run");
+		menuItem.addActionListener(this);
+		buildmenu.add(menuItem);
+
+
+		JMenu docmenu = new JMenu("Documentation");
+		menuBar.add(docmenu);
+
+		// Set up the first menu item.
+		menuItem = new JMenuItem("Open Documentation");
+		menuItem.setMnemonic(KeyEvent.VK_F11);
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F11,0));
+		menuItem.setActionCommand("refresh");
+		menuItem.addActionListener(this);
+		docmenu.add(menuItem);
+		//F11
 
 		return menuBar;
 	}
@@ -84,25 +110,21 @@ public class wind extends JFrame implements ActionListener
 		if("refresh".equals(e.getActionCommand()))
 		{ // new
 			pushUrlToBrowser();
-			// try
-			// {
-			// /*
-			// * Clear existing bars
-			// */
-			// WorkingDemo.getJacced().removeAll();
-			// /*
-			// * Put the urls into the respective browser bars.
-			// */
-			// fetchUrl();
-			// }
-			// catch(IOException e1)
-			// {
-			// // TODO Auto-generated catch block
-			// e1.printStackTrace();
-			// }
-			// System.out.println("R");
 		}
 		// Put Compile and Run stuff here
+		else if("Open".equals(e.getActionCommand()))
+		{
+			final JFileChooser fc = new JFileChooser();
+			int returnVal = fc.showOpenDialog(this);
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+	            File file = fc.getSelectedFile();
+	            //This is where a real application would open the file.
+	            System.out.println("Opening: " + file.getName() + ".");
+	        } else {
+	        	System.out.println("Open command cancelled by user.");
+	        }
+			
+		}
 		else if("Compile and Run".equals(e.getActionCommand()))
 		{
 			// do stuff
@@ -132,6 +154,8 @@ public class wind extends JFrame implements ActionListener
 		}
 	}
 
+	
+	
 	/*
 	 * public void fetchUrl() throws IOException {
 	 * 
@@ -224,17 +248,18 @@ public class wind extends JFrame implements ActionListener
 		Browser brow = BrowserFactory.create();
 		String selectedText = WorkingDemo.updateS();
 		String url = "http://www.cplusplus.com";
-		
+
 		boolean s = false;
 		String corkey = ""; 
 		for(String key : WorkingDemo.keywordToUrl.keySet())
-			if(selectedText.contains(key))
-			{
-				corkey = key;
-				s = true;
-			}
+			for(String selT : selectedText.split("\\r?\\n"))
+				if(selT.contains(key))
+				{
+					corkey = key;
+					s = true;
+				}
 		System.out.println("\n\n\n\n\n\n\n"+s);
-		
+
 		//if(WorkingDemo.keywordToUrl.containsKey(selectedText))
 		if(s)
 		{
