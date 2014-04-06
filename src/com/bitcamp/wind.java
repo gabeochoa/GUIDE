@@ -213,7 +213,7 @@ public class wind extends JFrame implements ActionListener
 				fis = null;
 				
 			
-				WorkingDemo.codeTabs = WorkingDemo.initalizeCodeTabs(deskpane, dir);
+				//WorkingDemo.codeTabs = WorkingDemo.initalizeCodeTabs(deskpane, dir);
 				
 			
 			} else {

@@ -110,6 +110,7 @@ public class WorkingDemo
 	{
 		setText("");
 	}
+	
 	public static void appentText(String s)
 	{
 		imp.textArea.append(s+"\n");
@@ -145,23 +146,29 @@ public class WorkingDemo
 
 	private static JInternalFrame initalizeCodeTabs(JDesktopPane deskPa)
 	{
+		imp = new ImprovedTabs();
+		
 		CodeViewComponent internalFrame = new CodeViewComponent();
-		internalFrame.setContentPane(new ImprovedTabs());
+		internalFrame.setContentPane(imp);
 		internalFrame.setLocation(0, 0);
+		internalFrame.setSize(SIDE_WIDTH, 720);
 		internalFrame.setVisible(true);
 		internalFrame.pack();
+		
 		return internalFrame;
 	}
 	
 	public static JInternalFrame initalizeCodeTabs(JDesktopPane deskPa, String s)
 	{
-		CodeViewComponent internalFrame = new CodeViewComponent();
 		imp = new ImprovedTabs(s);
+		
+		CodeViewComponent internalFrame = new CodeViewComponent();
 		internalFrame.setContentPane(imp);
 		internalFrame.setLocation(0, 0);
-		internalFrame.setSize(640, 720);
+		internalFrame.setSize(SIDE_WIDTH, 720);
 		internalFrame.setVisible(true);
 		internalFrame.pack();
+		
 		return internalFrame;
 	}
 
