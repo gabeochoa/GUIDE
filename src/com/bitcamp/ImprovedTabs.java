@@ -74,7 +74,7 @@ public class ImprovedTabs extends JPanel
 
 		// Refresh button
 		JButton mybutton = new JButton("Refresh");
-		tabbedPane.add(mybutton);
+		// tabbedPane.add(mybutton);
 		// Compile and Run
 		JButton mybutton2 = new JButton("Compile and Run");
 
