@@ -44,11 +44,12 @@ public class WorkingDemo
 		// while(true)
 		// update();
 	}
-	
-	public static JInternalFrame getInternalFrame(){
+
+	public static JInternalFrame getInternalFrame()
+	{
 		return internalFrameBr;
 	}
-	
+
 	public static DesktopScrollPane getScrolly()
 	{
 		return scrollyTheScrollPane;
@@ -72,12 +73,26 @@ public class WorkingDemo
 		return imp.textArea.getSelectedText();
 	}
 
+	public static String getRawCodeTextBlock()
+	{
+		/*
+		 * For bars processing
+		 */
+		return imp.textArea.getText();
+
+		/*
+		 * Gets the text that the user has selected.
+		 */
+		// return imp.textArea.getSelectedText();
+	}
+
 	public static JAccordian getJacced()
 	{
 		return jac;
 	}
-	
-	public static void setJacced(JAccordian jac2){
+
+	public static void setJacced(JAccordian jac2)
+	{
 		WorkingDemo.jac = jac2;
 	}
 
