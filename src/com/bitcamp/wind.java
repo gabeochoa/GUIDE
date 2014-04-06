@@ -256,7 +256,7 @@ public class wind extends JFrame implements ActionListener
 		 */
 
 		brow.loadURL(url);
-		jac2.addBar(selectedText, brow.getView().getComponent());
+		jac2.addBar(corkey, brow.getView().getComponent());
 		jac2.setLocation(0, 0);
 		jac2.setSize(640, 720);
 		jac2.setVisible(true);
