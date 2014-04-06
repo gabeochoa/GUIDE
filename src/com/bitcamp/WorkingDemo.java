@@ -195,6 +195,7 @@ public class WorkingDemo
 		rdioBrowser = BrowserFactory.create(context);
 		
 		rdioBrowser.getCacheStorage().clearCache();
+		rdioBrowser.getCookieStorage().deleteAll();
 		
 		rdioFrame = new JInternalFrame(title, false);
 		rdioFrame.setContentPane(rdioBrowser.getView().getComponent());
