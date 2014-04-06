@@ -12,25 +12,43 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 
 import com.teamdev.jxbrowser.chromium.Browser;
+import com.teamdev.jxbrowser.chromium.BrowserContext;
 import com.teamdev.jxbrowser.chromium.BrowserFactory;
-
+import com.teamdev.jxbrowser.chromium.events.FailLoadingEvent;
+import com.teamdev.jxbrowser.chromium.events.FinishLoadingEvent;
+import com.teamdev.jxbrowser.chromium.events.FrameLoadEvent;
+import com.teamdev.jxbrowser.chromium.events.LoadAdapter;
+import com.teamdev.jxbrowser.chromium.events.LoadEvent;
+import com.teamdev.jxbrowser.chromium.events.ProvisionalLoadingEvent;
+import com.teamdev.jxbrowser.chromium.events.StartLoadingEvent;
+import com.teamdev.jxbrowser.chromium.LoggerProvider;
+import java.util.logging.*;
 public class WorkingDemo
 {
 
 	public static JAccordian jac = null;
 	public static JInternalFrame internalFrameBr;
+	public static JInternalFrame rdioFrame;
+	public static Browser rdioBrowser;
 	private static ImprovedTabs imp;
 	public static HashMap<String, String> keywordToUrl = new HashMap<String, String>();
 	public static DesktopScrollPane scrollyTheScrollPane;
-
+	private static final int RDIO_HEIGHT = 75;
+	
 	public static void main(String[] args) throws IOException
 	{
 		initializeURL_Map();
+		
+		LoggerProvider.getBrowserLogger().setLevel(Level.OFF);
+		LoggerProvider.getIPCLogger().setLevel(Level.OFF);
+		LoggerProvider.getChromiumProcessLogger().setLevel(Level.OFF);
+		
 		JDesktopPane desktopPane = new JDesktopPane();
 		JInternalFrame codeTabs = initalizeCodeTabs(desktopPane);
 		codeTabs.setSize(640, 700);
@@ -38,11 +56,12 @@ public class WorkingDemo
 		desktopPane.add(codeTabs);
 		desktopPane.add(createInternalFrame("Browser",
 				"http://www.cplusplus.com", 100));
+		desktopPane.add(createRdioFrame("rdio"));
 		scrollyTheScrollPane = new DesktopScrollPane(desktopPane);
 		rdioInternalFrame rint = new rdioInternalFrame();
 		desktopPane.add(rint);
 		wind frame = new wind(desktopPane);
-		desktopPane.add(frame);
+		//desktopPane.add(frame);
 		scrollyTheScrollPane.resizeDesktop();
 		// while(true)
 		// update();
@@ -131,8 +150,6 @@ public class WorkingDemo
 	private static JInternalFrame createInternalFrame(String title, String url,
 			int offset)
 	{
-		Browser browser = BrowserFactory.create();
-		browser.loadURL(url);
 		jac = new JAccordian();
 		/*
 		 * jac.addBar("One", browser.getView().getComponent());
@@ -148,8 +165,8 @@ public class WorkingDemo
 		internalFrameBr = new JInternalFrame(title, true);
 		internalFrameBr.setContentPane(jac);
 		// internalFrame.setContentPane(browser.getView().getComponent());
-		internalFrameBr.setLocation(640, 0/* offset */);
-		internalFrameBr.setSize(640, 720);
+		internalFrameBr.setLocation(640, RDIO_HEIGHT/* offset */);
+		internalFrameBr.setSize(640, 720 - RDIO_HEIGHT);
 		internalFrameBr.setVisible(true);
 		return internalFrameBr;
 	}
@@ -162,7 +179,54 @@ public class WorkingDemo
 		internalFrame.setVisible(true);
 		return internalFrame;
 	}
+	
+	private static JInternalFrame createRdioFrame(String title)
+	{
+		BrowserContext context = new BrowserContext("bstorage_yolo");
+		rdioBrowser = BrowserFactory.create(context);
+		
+		rdioBrowser.getCacheStorage().clearCache();
+		
+		rdioFrame = new JInternalFrame(title, false);
+		rdioFrame.setContentPane(rdioBrowser.getView().getComponent());
+		rdioFrame.setLocation(640, 0);
+		rdioFrame.setSize(640, RDIO_HEIGHT);
+		rdioFrame.setVisible(true);
+		
+		rdioBrowser.addLoadListener(new LoadAdapter() {
+            @Override
+            public void onFinishLoadingFrame(FinishLoadingEvent event) {
+                if (event.isMainFrame()) {
+                    Browser browser = event.getBrowser();
+                    
+                    browser.executeJavaScript("var keys = [37, 38, 39, 40];");
+                    
+                    browser.executeJavaScript("function preventDefault(e) { e = e || window.event; if (e.preventDefault) e.preventDefault(); e.returnValue = false; }");
+                    browser.executeJavaScript("function keydown(e) { for (var i = keys.length; i--;) { if (e.keyCode === keys[i]) { preventDefault(e); return; } } }");
+                    browser.executeJavaScript("function wheel(e) { preventDefault(e); }");
+                    
+                    browser.executeJavaScript("window.addEventListener('DOMMouseScroll', wheel, false);");
+                    browser.executeJavaScript("window.onmousewheel = document.onmousewheel = wheel;");
+                    browser.executeJavaScript("document.onkeydown = keydown;");
+                    browser.executeJavaScript("$('body').css('overflow', 'hidden'); $('body').mousedown(function(e){if(e.button==1)return false});");
+                    
+                    //browser.executeJavaScript("window.scrollTo(0, 0);");
+                    
+                    //PlayAlbum(browser, "a637574");
+                }
+            }
+        });
+		
+		rdioBrowser.loadURL("http://guide-shaben.rhcloud.com");
+		
+		return rdioFrame;
+	}
 
+	public static void PlayAlbum(Browser browser, String id)
+	{
+		browser.executeJavaScript("$('#play_key').val('" + id + "'); $('#play').trigger('click');");
+	}
+	
 	public static void initializeURL_Map() throws IOException
 	{
 

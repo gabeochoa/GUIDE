@@ -20,7 +20,7 @@ public class rdioViewComponent extends JInternalFrame
 	public rdioViewComponent()
 	{
 		JPanel cp = new JPanel(new BorderLayout());
-		cp.add();
+		//cp.add();
 
 		setContentPane(cp);
 		setTitle("Code");
