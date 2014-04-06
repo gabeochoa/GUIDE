@@ -270,8 +270,8 @@ public class wind extends JFrame implements ActionListener
 		 */
 		StringBuilder command = new StringBuilder("g++ -o ");
 		command.append(sourceName);
-		command.append("executableName ");
-		command.append("sourceName");
+		command.append(executableName);
+		command.append(sourceName);
 		String cmdString = command.toString();
 		ProcessBuilder pb = new ProcessBuilder(cmdString);
 		Process compileDatCode = pb.start();
