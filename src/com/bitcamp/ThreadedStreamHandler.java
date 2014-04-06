@@ -121,18 +121,6 @@ public class ThreadedStreamHandler extends Thread
     }
   }
   
-  private void doSleep(long millis)
-  {
-    try
-    {
-      Thread.sleep(millis);
-    }
-    catch (InterruptedException e)
-    {
-      // ignore
-    }
-  }
-  
   public StringBuilder getOutputBuffer()
   {
     return outputBuffer;

@@ -2,6 +2,9 @@ package com.bitcamp;
 
 
 import java.awt.BorderLayout;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -23,7 +26,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 import com.teamdev.jxbrowser.chromium.Browser;
@@ -31,10 +33,12 @@ import com.teamdev.jxbrowser.chromium.BrowserFactory;
 
 public class wind extends JFrame implements ActionListener
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7447036913279756726L;
 	public String direc = "";
 	public String dir = "";
-	private JDesktopPane daddy;
-
 	public wind(JDesktopPane sc)
 	{
 		setTitle("guIDE");
@@ -45,7 +49,6 @@ public class wind extends JFrame implements ActionListener
 		setJMenuBar(createMenuBar(this));
 		setVisible(true);
 
-		daddy = sc;
 		direc = System.getProperty("user.dir");
 	}
 
@@ -73,10 +76,45 @@ public class wind extends JFrame implements ActionListener
 		menuItem.setMnemonic(KeyEvent.VK_Q);
 		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
 				ActionEvent.ALT_MASK));
-		menuItem.setActionCommand("quit");
+		menuItem.setActionCommand("Quit");
 		menuItem.addActionListener(this);
 		filemenu.add(menuItem);
 
+		JMenu editmenu = new JMenu("Edit");
+		menuBar.add(editmenu);
+		
+		menuItem = new JMenuItem("Cut");
+		menuItem.setMnemonic(KeyEvent.VK_X);
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,
+				ActionEvent.CTRL_MASK));
+		menuItem.setActionCommand("Cut");
+		menuItem.addActionListener(this);
+		editmenu.add(menuItem);
+		
+		menuItem = new JMenuItem("Copy");
+		menuItem.setMnemonic(KeyEvent.VK_C);
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,
+				ActionEvent.CTRL_MASK));
+		menuItem.setActionCommand("Copy");
+		menuItem.addActionListener(this);
+		editmenu.add(menuItem);
+		
+		menuItem = new JMenuItem("Paste");
+		menuItem.setMnemonic(KeyEvent.VK_V);
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V,
+				ActionEvent.CTRL_MASK));
+		menuItem.setActionCommand("Paste");
+		menuItem.addActionListener(this);
+		editmenu.add(menuItem);
+		
+		menuItem = new JMenuItem("Select All");
+		menuItem.setMnemonic(KeyEvent.VK_A);
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,
+				ActionEvent.CTRL_MASK));
+		menuItem.setActionCommand("Select All");
+		menuItem.addActionListener(this);
+		editmenu.add(menuItem);
+		
 		JMenu buildmenu = new JMenu("Build");
 		menuBar.add(buildmenu);
 
@@ -94,12 +132,11 @@ public class wind extends JFrame implements ActionListener
 
 		// Set up the first menu item.
 		menuItem = new JMenuItem("Open Documentation");
-		menuItem.setMnemonic(KeyEvent.VK_F11);
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F11,0));
+		menuItem.setMnemonic(KeyEvent.VK_F12);
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F12, 0));
 		menuItem.setActionCommand("refresh");
 		menuItem.addActionListener(this);
 		docmenu.add(menuItem);
-		//F11
 
 		return menuBar;
 	}
@@ -190,9 +227,27 @@ public class wind extends JFrame implements ActionListener
 				e1.printStackTrace();
 			}
 		}
-		else
-		{ // quit
+		else if("Quit".equals(e.getActionCommand()))
+		{
 			System.exit(0);
+		}
+		else if("Cut".equals(e.getActionCommand()))
+		{
+			WorkingDemo.cut();
+		}
+		else if("Copy".equals(e.getActionCommand()))
+		{
+			StringSelection selection = new StringSelection(WorkingDemo.getSelectedText());
+			Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+			clipboard.setContents(selection, selection);
+		}
+		else if("Paste".equals(e.getActionCommand()))
+		{
+			WorkingDemo.pasteText();
+		}
+		else if("Select All".equals(e.getActionCommand()))
+		{
+			WorkingDemo.selectAll();
 		}
 	}
 
@@ -355,17 +410,11 @@ public class wind extends JFrame implements ActionListener
 		System.out.println("STDERR");
 		System.out.println(stderr);
 		
-		/* Our code */
-		String code = WorkingDemo.getRawCodeTextBlock();
+		WorkingDemo.getRawCodeTextBlock();
 
 		/* Our source file */
 
-		String[] f = dir.contains("\\") ? dir.split("\\") : dir.split("/");
-		String sourceName = f[f.length-1];
-		String executableName = "outputexec";
-		//PrintWriter writer = new PrintWriter(dir, "UTF-8");
-		//writer.println(code);
-		//writer.close();
+		//String[] f = dir.contains("\\") ? dir.split("\\") : dir.split("/");
 
 		/*
 		 * Write the compile command to the terminal.

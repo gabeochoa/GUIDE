@@ -15,6 +15,10 @@ import org.fife.ui.rtextarea.RTextScrollPane;
  */
 public class CodeViewComponent extends JInternalFrame
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7567932001108428532L;
 	private RSyntaxTextArea currentTextBlock;
 
 	public CodeViewComponent()

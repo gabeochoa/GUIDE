@@ -23,6 +23,10 @@ import javax.swing.SwingUtilities;
 public class DesktopScrollPane extends JScrollPane
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4966959960547173597L;
 	private JDesktopPane desktopPane;
 	private InternalFrameComponentListener componentListener;
 

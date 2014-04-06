@@ -27,6 +27,11 @@ import javax.swing.JPanel;
 public class JAccordian extends JPanel implements ActionListener
 {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5111181623890837876L;
+
+	/**
 	 * The top panel: contains the buttons displayed on the top of the
 	 * JOutlookBar
 	 */
@@ -42,7 +47,7 @@ public class JAccordian extends JPanel implements ActionListener
 	 * A LinkedHashMap of bars: we use a linked hash map to preserve the order
 	 * of the bars
 	 */
-	private Map bars = new LinkedHashMap();
+	private Map<String, BarInfo> bars = new LinkedHashMap<String, BarInfo>();
 
 	/**
 	 * The currently visible bar (zero-based index)
@@ -150,7 +155,7 @@ public class JAccordian extends JPanel implements ActionListener
 		int bottomBars = totalBars - topBars;
 
 		// Get an iterator to walk through out bars with
-		Iterator itr = this.bars.keySet().iterator();
+		Iterator<String> itr = this.bars.keySet().iterator();
 
 		// Render the top bars: remove all components, reset the GridLayout to
 		// hold to correct number of bars, add the bars, and "validate" it to
@@ -204,7 +209,7 @@ public class JAccordian extends JPanel implements ActionListener
 	public void actionPerformed(ActionEvent e)
 	{
 		int currentBar = 0;
-		for(Iterator i = this.bars.keySet().iterator(); i.hasNext();)
+		for(Iterator<String> i = this.bars.keySet().iterator(); i.hasNext();)
 		{
 			String barName = (String) i.next();
 			BarInfo barInfo = (BarInfo) this.bars.get(barName);

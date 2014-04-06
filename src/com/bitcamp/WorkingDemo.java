@@ -12,21 +12,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
-
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 
 import com.teamdev.jxbrowser.chromium.Browser;
 import com.teamdev.jxbrowser.chromium.BrowserContext;
 import com.teamdev.jxbrowser.chromium.BrowserFactory;
-import com.teamdev.jxbrowser.chromium.events.FailLoadingEvent;
 import com.teamdev.jxbrowser.chromium.events.FinishLoadingEvent;
-import com.teamdev.jxbrowser.chromium.events.FrameLoadEvent;
 import com.teamdev.jxbrowser.chromium.events.LoadAdapter;
-import com.teamdev.jxbrowser.chromium.events.LoadEvent;
-import com.teamdev.jxbrowser.chromium.events.ProvisionalLoadingEvent;
-import com.teamdev.jxbrowser.chromium.events.StartLoadingEvent;
 import com.teamdev.jxbrowser.chromium.LoggerProvider;
 import java.util.logging.*;
 public class WorkingDemo
@@ -58,13 +51,10 @@ public class WorkingDemo
 				"http://www.cplusplus.com", 100));
 		desktopPane.add(createRdioFrame("rdio"));
 		scrollyTheScrollPane = new DesktopScrollPane(desktopPane);
-		rdioInternalFrame rint = new rdioInternalFrame();
-		desktopPane.add(rint);
-		wind frame = new wind(desktopPane);
-		//desktopPane.add(frame);
+		
+		new wind(desktopPane);
+		
 		scrollyTheScrollPane.resizeDesktop();
-		// while(true)
-		// update();
 	}
 
 	public static JInternalFrame getInternalFrame()
@@ -76,11 +66,6 @@ public class WorkingDemo
 	{
 		return scrollyTheScrollPane;
 	}
-
-	private static String update()
-	{
-		return imp.textArea.getText();
-	 }
 
 	public static String updateS()
 	{
@@ -98,6 +83,27 @@ public class WorkingDemo
 	{
 		imp.textArea.setText(s);
 	}
+	
+	public static String getSelectedText()
+	{
+		return imp.textArea.getSelectedText();
+	}
+
+	public static void pasteText()
+	{
+		imp.textArea.paste();
+	}
+	
+	public static void selectAll()
+	{
+		imp.textArea.selectAll();
+	}
+
+	public static void cut()
+	{
+		imp.textArea.cut();
+	}
+	
 	public static void clearText()
 	{
 		setText("");
@@ -171,15 +177,6 @@ public class WorkingDemo
 		return internalFrameBr;
 	}
 
-	private static JInternalFrame createCodeFrame()
-	{
-		CodeViewComponent internalFrame = new CodeViewComponent();
-		internalFrame.setLocation(0, 0);
-		internalFrame.setSize(640, 720);
-		internalFrame.setVisible(true);
-		return internalFrame;
-	}
-	
 	private static JInternalFrame createRdioFrame(String title)
 	{
 		BrowserContext context = new BrowserContext("bstorage_yolo");

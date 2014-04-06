@@ -67,7 +67,8 @@ public class SysComEx
     this.adminPassword = null;
   }
 
-  public int executeCommand()
+  @SuppressWarnings("finally")
+public int executeCommand()
   throws IOException, InterruptedException
   {
     int exitValue = -99;

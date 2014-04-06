@@ -34,22 +34,15 @@ package com.bitcamp;
  * TabbedPaneDemo.java requires one additional file: images/middle.gif.
  */
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
@@ -57,6 +50,10 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 public class ImprovedTabs extends JPanel
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1914707480635417028L;
 	RSyntaxTextArea textArea;
 	JMenuBar menu;
 
@@ -157,37 +154,4 @@ public class ImprovedTabs extends JPanel
 			return null;
 		}
 	}
-
-	/**
-	 * Create the GUI and show it. For thread safety, this method should be
-	 * invoked from the event dispatch thread.
-	 */
-	private static void createAndShowGUI()
-	{
-		// Create and set up the window.
-		JFrame frame = new JFrame("TabbedPaneDemo");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		// Add content to the window.
-		frame.add(new ImprovedTabs(), BorderLayout.CENTER);
-
-		// Display the window.
-		frame.pack();
-		frame.setVisible(true);
-	}
-//
-//	public static void main(String[] args)
-//	{
-//		// Schedule a job for the event dispatch thread:
-//		// creating and showing this application's GUI.
-//		SwingUtilities.invokeLater(new Runnable()
-//		{
-//			public void run()
-//			{
-//				// Turn off metal's use of bold fonts
-//				UIManager.put("swing.boldMetal", Boolean.FALSE);
-//				createAndShowGUI();
-//			}
-//		});
-//	}
 }
